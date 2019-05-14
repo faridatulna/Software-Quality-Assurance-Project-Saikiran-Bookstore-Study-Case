@@ -1,0 +1,34 @@
+Folder,Files,LOC,SLOC-P,SLOC-L,MVG,BLOC,C&SLOC,CLOC,CWORD,HCLOC,HCWORD
+Total,204,34130,26420,25298,815,4441,189,3269,13359,314,1212
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master,204,34130,26420,25298,815,4441,189,3269,13359,314,1212
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\build,86,14439,11608,11590,320,1922,71,909,3769,93,325
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\build\web,86,14439,11608,11590,320,1922,71,909,3769,93,325
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\build\web\css,11,2431,1924,1385,0,384,17,123,621,14,65
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\build\web\css\forms,4,422,347,248,0,54,4,21,180,6,44
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\build\web\includesPage,20,2291,1845,604,91,241,3,205,637,0,0
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\build\web\includesPage\gChartings,8,1562,1204,485,76,176,3,182,597,0,0
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\build\web\includesPage\hesders_sidebars,3,66,41,2,1,8,0,17,28,0,0
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\build\web\includesPage\mainHeaders,3,231,214,60,6,17,0,0,0,0,0
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\build\web\js,12,1628,1413,8148,56,79,10,136,838,79,260
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\build\web\js\gclibrary,3,924,919,5945,8,5,2,0,2,0,0
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\jLibsEssentials,1,615,466,0,0,61,7,88,175,8,22
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\src,31,4637,2738,2118,175,536,40,1363,5646,120,540
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\src\java,31,4637,2738,2118,175,536,40,1363,5646,120,540
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\src\java\admin,3,461,299,241,17,57,8,105,479,12,54
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\src\java\cart,2,370,212,173,31,60,3,98,398,8,36
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\src\java\database,1,48,29,21,4,10,0,9,24,4,18
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\src\java\helpers,3,199,80,63,6,26,0,93,252,12,54
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\src\java\loginRegister,6,943,560,446,27,87,9,296,1322,20,90
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\src\java\orders,1,215,122,98,7,33,1,60,238,4,18
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\src\java\product,13,2087,1217,908,67,234,17,636,2657,52,234
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\src\java\product\addProductPack,1,95,44,32,1,7,1,44,186,4,18
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\src\java\user,2,314,219,168,16,29,2,66,276,8,36
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\web,86,14439,11608,11590,320,1922,71,909,3769,93,325
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\web\css,11,2431,1924,1385,0,384,17,123,621,14,65
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\web\css\forms,4,422,347,248,0,54,4,21,180,6,44
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\web\includesPage,20,2291,1845,604,91,241,3,205,637,0,0
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\web\includesPage\gChartings,8,1562,1204,485,76,176,3,182,597,0,0
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\web\includesPage\hesders_sidebars,3,66,41,2,1,8,0,17,28,0,0
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\web\includesPage\mainHeaders,3,231,214,60,6,17,0,0,0,0,0
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\web\js,12,1628,1413,8148,56,79,10,136,838,79,260
+E:\KULIAH\smt6\Software Quality Assurance\saikiranBookstoreApp-master\web\js\gclibrary,3,924,919,5945,8,5,2,0,2,0,0
