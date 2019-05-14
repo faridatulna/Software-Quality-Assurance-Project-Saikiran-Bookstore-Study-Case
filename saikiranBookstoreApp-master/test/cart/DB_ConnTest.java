@@ -51,9 +51,8 @@ public class DB_ConnTest {
         //Class.forName("com.mysql.jdbc.Driver"); 
         System.out.println("test method 1 : getConnection");
         DB_Conn instance = new DB_Conn();
-        Connection expResult = instance.getConnection();
-                //DriverManager.getConnection("jdbc:mysql://localhost:3306/"+instance.getDatabase()+"",""+instance.getUsername()+"",""+instance.getPassword()+"");
-        Connection result = expResult;
+        Connection expResult = null;
+        Connection result = instance.getConnection();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");

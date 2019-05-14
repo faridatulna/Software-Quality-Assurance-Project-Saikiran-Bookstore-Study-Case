@@ -43,13 +43,13 @@ public class DB_ConnTest {
      */
     @Test
     public void testGetConnection() throws Exception {
-        System.out.println("getConnection");
+        System.out.println("test method 1 : getConnection");
         DB_Conn instance = new DB_Conn();
         Connection expResult = null;
         Connection result = instance.getConnection();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       // fail("The test case is a prototype.");
     }
 
     /**
@@ -57,13 +57,13 @@ public class DB_ConnTest {
      */
     @Test
     public void testGetDatabase() {
-        System.out.println("getDatabase");
+        System.out.println("test method 2 : getDatabase");
         DB_Conn instance = new DB_Conn();
-        String expResult = "";
+        String expResult = "saikiran enterprises";
         String result = instance.getDatabase();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -71,12 +71,12 @@ public class DB_ConnTest {
      */
     @Test
     public void testSetDatabase() {
-        System.out.println("setDatabase");
-        String database = "";
+        System.out.println("test method 3 : setDatabase");
+        String database = "saikiran enterprises";
         DB_Conn instance = new DB_Conn();
         instance.setDatabase(database);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -84,13 +84,13 @@ public class DB_ConnTest {
      */
     @Test
     public void testGetUsername() {
-        System.out.println("getUsername");
+        System.out.println("test method 4 : getUsername");
         DB_Conn instance = new DB_Conn();
-        String expResult = "";
+        String expResult = "charig";
         String result = instance.getUsername();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -98,12 +98,12 @@ public class DB_ConnTest {
      */
     @Test
     public void testSetUsername() {
-        System.out.println("setUsername");
-        String username = "";
+        System.out.println("test method 5 : setUsername");
+        String username = "charig";
         DB_Conn instance = new DB_Conn();
         instance.setUsername(username);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -111,13 +111,13 @@ public class DB_ConnTest {
      */
     @Test
     public void testGetPassword() {
-        System.out.println("getPassword");
+        System.out.println("test method 6 : getPassword");
         DB_Conn instance = new DB_Conn();
-        String expResult = "";
+        String expResult = "1234567";
         String result = instance.getPassword();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -125,12 +125,12 @@ public class DB_ConnTest {
      */
     @Test
     public void testSetPassword() {
-        System.out.println("setPassword");
-        String password = "";
+        System.out.println("test method 7 : setPassword");
+        String password = "1234567";
         DB_Conn instance = new DB_Conn();
         instance.setPassword(password);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
     
 }

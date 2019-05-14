@@ -42,12 +42,12 @@ public class userTest {
      */
     @Test
     public void testSetUserEmail() throws Exception {
-        System.out.println("setUserEmail");
-        String userEmail = "";
+        System.out.println("test method 1 : setUserEmail");
+        String userEmail = "dead.night7@gmail.com";
         user instance = new user();
         instance.setUserEmail(userEmail);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       // fail("The test case is a prototype.");
     }
 
     /**
@@ -55,13 +55,13 @@ public class userTest {
      */
     @Test
     public void testGetUserEmail() {
-        System.out.println("getUserEmail");
+        System.out.println("test method 2 : getUserEmail");
         user instance = new user();
-        String expResult = "";
+        String expResult = "dead.night7@gmail.com";
         String result = instance.getUserEmail();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -69,13 +69,13 @@ public class userTest {
      */
     @Test
     public void testGetUserId() {
-        System.out.println("getUserId");
+        System.out.println("test method 3 : getUserId");
         user instance = new user();
-        int expResult = 0;
+        int expResult = 1;
         int result = instance.getUserId();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -83,13 +83,13 @@ public class userTest {
      */
     @Test
     public void testGetUsername() {
-        System.out.println("getUsername");
+        System.out.println("test method 4 : getUsername");
         user instance = new user();
-        String expResult = "";
+        String expResult = "Chirag Pandit";
         String result = instance.getUsername();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -97,13 +97,13 @@ public class userTest {
      */
     @Test
     public void testGetAddress() {
-        System.out.println("getAddress");
+        System.out.println("test method 5 : getAddress");
         user instance = new user();
-        String expResult = "";
+        String expResult = "B-10, 102 SilverPark, Mira Bhyendar Road, Mira Road east";
         String result = instance.getAddress();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -111,13 +111,13 @@ public class userTest {
      */
     @Test
     public void testGetGender() {
-        System.out.println("getGender");
+        System.out.println("test method 6 : getGender");
         user instance = new user();
-        String expResult = "";
+        String expResult = "male";
         String result = instance.getGender();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -125,13 +125,13 @@ public class userTest {
      */
     @Test
     public void testGetMobileNum() {
-        System.out.println("getMobileNum");
+        System.out.println("test method 7 : getMobileNum");
         user instance = new user();
-        String expResult = "";
+        String expResult = "9004300";
         String result = instance.getMobileNum();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -139,13 +139,13 @@ public class userTest {
      */
     @Test
     public void testGetUserImage() {
-        System.out.println("getUserImage");
+        System.out.println("test method 8 : getUserImage");
         user instance = new user();
-        String expResult = "";
+        String expResult = null;
         String result = instance.getUserImage();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -153,14 +153,14 @@ public class userTest {
      */
     @Test
     public void testFindUserId() throws Exception {
-        System.out.println("findUserId");
-        String email = "";
+        System.out.println("test method 9 : findUserId");
+        String email = "dead.night7@gmail.com";
         user instance = new user();
-        int expResult = 0;
+        int expResult = 1;
         int result = instance.findUserId(email);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -168,14 +168,14 @@ public class userTest {
      */
     @Test
     public void testFetchAllValues() throws Exception {
-        System.out.println("fetchAllValues");
-        int userId = 0;
+        System.out.println("test method 10 : fetchAllValues");
+        int userId = 1;
         user instance = new user();
         boolean expResult = false;
         boolean result = instance.fetchAllValues(userId);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -183,11 +183,11 @@ public class userTest {
      */
     @Test
     public void testMain() throws Exception {
-        System.out.println("main");
+        System.out.println("test method 11 : main");
         String[] args = null;
         user.main(args);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
     
 }
