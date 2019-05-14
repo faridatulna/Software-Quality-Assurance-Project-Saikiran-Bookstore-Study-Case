@@ -20,8 +20,8 @@ public class product {
 
     private int productId; 
     private ArrayList<String> category = new ArrayList<String>();
-    private ArrayList<String> subcategory = new ArrayList<String>();;
-    private ArrayList<String> company = new ArrayList<String>();;
+    private ArrayList<String> subcategory = new ArrayList<String>();
+    private ArrayList<String> company = new ArrayList<String>();
     private Connection con;
     
     

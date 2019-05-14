@@ -4,12 +4,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/KULIAH/smt6/Software%20Quality%20Assurance/saikiranBookstoreApp-master/test/admin/addAnAdministratorTest.java</file>
-            <file>file:/E:/KULIAH/smt6/Software%20Quality%20Assurance/saikiranBookstoreApp-master/src/java/helpers/EmailValidator.java</file>
-            <file>file:/E:/KULIAH/smt6/Software%20Quality%20Assurance/saikiranBookstoreApp-master/test/cart/DB_ConnTest.java</file>
-            <file>file:/E:/KULIAH/smt6/Software%20Quality%20Assurance/saikiranBookstoreApp-master/src/java/admin/registerServlet.java</file>
-            <file>file:/E:/KULIAH/smt6/Software%20Quality%20Assurance/saikiranBookstoreApp-master/test/admin/administratorTest.java</file>
-            <file>file:/E:/KULIAH/smt6/Software%20Quality%20Assurance/saikiranBookstoreApp-master/test/helpers/EmailValidatorTest.java</file>
+            <file>file:/E:/KULIAH/smt6/Software%20Quality%20Assurance/pmpl-saikiran/saikiranBookstoreApp-master/test/product/productBeanTest.java</file>
+            <file>file:/E:/KULIAH/smt6/Software%20Quality%20Assurance/pmpl-saikiran/saikiranBookstoreApp-master/src/java/product/productBean.java</file>
+            <file>file:/E:/KULIAH/smt6/Software%20Quality%20Assurance/pmpl-saikiran/saikiranBookstoreApp-master/test/product/productTest.java</file>
+            <file>file:/E:/KULIAH/smt6/Software%20Quality%20Assurance/pmpl-saikiran/saikiranBookstoreApp-master/src/java/product/product.java</file>
         </group>
     </open-files>
 </project-private>

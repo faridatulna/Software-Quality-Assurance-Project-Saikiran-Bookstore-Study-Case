@@ -44,13 +44,13 @@ public class productTest {
     @Test
     public void testGetId() throws Exception {
         System.out.println("getId");
-        String productName = "";
+        String productName = "1";
         product instance = new product();
         int expResult = 0;
         int result = instance.getId(productName);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -60,11 +60,17 @@ public class productTest {
     public void testGetCategory() throws Exception {
         System.out.println("getCategory");
         product instance = new product();
-        ArrayList<String> expResult = null;
+        ArrayList<String> expResult = new ArrayList<String>();
+        expResult.add("Books");
+        expResult.add("Computers");
+        expResult.add("Games");
+        expResult.add("Movie");
+        expResult.add("Movies");
+        expResult.add("Stationaries");
         ArrayList<String> result = instance.getCategory();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -74,11 +80,25 @@ public class productTest {
     public void testGetSubcategory_0args() throws Exception {
         System.out.println("getSubcategory");
         product instance = new product();
-        ArrayList<String> expResult = null;
+        ArrayList<String> expResult = new ArrayList<String>(); 
+        expResult.add("Academic");
+        expResult.add("Action");
+        expResult.add("Action (Movies)");
+        expResult.add("Adventure");
+        expResult.add("Colors");
+        expResult.add("First Person");
+        expResult.add("Horror");
+        expResult.add("Pens");
+        expResult.add("Puzzle");
+        expResult.add("Racing");
+        expResult.add("Sandbox");
+        expResult.add("Sound");
+        expResult.add("Sports");
+        expResult.add("Storage");
         ArrayList<String> result = instance.getSubcategory();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -87,13 +107,14 @@ public class productTest {
     @Test
     public void testGetSubcategory_String() throws Exception {
         System.out.println("getSubcategory");
-        String category = "";
+        String category = "Books";
         product instance = new product();
-        ArrayList<String> expResult = null;
+        ArrayList<String> expResult = new ArrayList<String>();
+        expResult.add("Academic");
         ArrayList<String> result = instance.getSubcategory(category);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -102,13 +123,14 @@ public class productTest {
     @Test
     public void testGetCompany_String() throws Exception {
         System.out.println("getCompany");
-        String category = "";
+        String category = "Computers";
         product instance = new product();
-        ArrayList<String> expResult = null;
+        ArrayList<String> expResult = new ArrayList<String>();
+        expResult.addAll(["Dell","Acer"]);
         ArrayList<String> result = instance.getCompany(category);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -118,11 +140,11 @@ public class productTest {
     public void testGetCompany_0args() throws Exception {
         System.out.println("getCompany");
         product instance = new product();
-        ArrayList<String> expResult = null;
+        ArrayList<String> expResult = instance.getCompany();
         ArrayList<String> result = instance.getCompany();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -133,8 +155,9 @@ public class productTest {
         System.out.println("main");
         String[] args = null;
         product.main(args);
+        
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
     
 }

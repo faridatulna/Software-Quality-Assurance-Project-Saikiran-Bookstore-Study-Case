@@ -88,7 +88,7 @@ public class addUserDetalsServletTest {
     public void testGetServletInfo() {
         System.out.println("test method 4 : getServletInfo");
         addUserDetalsServlet instance = new addUserDetalsServlet();
-        String expResult = "";
+        String expResult = "Short description";
         String result = instance.getServletInfo();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.

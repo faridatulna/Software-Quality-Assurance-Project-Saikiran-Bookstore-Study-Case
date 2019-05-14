@@ -50,7 +50,7 @@ public class changeMyPasswordTest {
         changeMyPassword instance = new changeMyPassword();
         instance.processRequest(request, response);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -64,7 +64,7 @@ public class changeMyPasswordTest {
         changeMyPassword instance = new changeMyPassword();
         instance.doGet(request, response);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -78,7 +78,7 @@ public class changeMyPasswordTest {
         changeMyPassword instance = new changeMyPassword();
         instance.doPost(request, response);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -88,11 +88,11 @@ public class changeMyPasswordTest {
     public void testGetServletInfo() {
         System.out.println("getServletInfo");
         changeMyPassword instance = new changeMyPassword();
-        String expResult = "";
+        String expResult = "Short description";
         String result = instance.getServletInfo();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
     
 }

@@ -42,13 +42,13 @@ public class productBeanTest {
      */
     @Test
     public void testGetCompany() {
-        System.out.println("getCompany");
+        System.out.println("test method 1 : getCompany");
         productBean instance = new productBean();
-        String expResult = "";
+        String expResult = null;
         String result = instance.getCompany();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -56,12 +56,12 @@ public class productBeanTest {
      */
     @Test
     public void testSetCompany() {
-        System.out.println("setCompany");
-        String company = "";
+        System.out.println("test method 2 : setCompany");
+        String company = "Dell";
         productBean instance = new productBean();
         instance.setCompany(company);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -69,13 +69,13 @@ public class productBeanTest {
      */
     @Test
     public void testGetCategory() {
-        System.out.println("getCategory");
+        System.out.println("test method 3 : getCategory");
         productBean instance = new productBean();
-        String expResult = "";
+        String expResult = null;
         String result = instance.getCategory();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -83,12 +83,12 @@ public class productBeanTest {
      */
     @Test
     public void testSetCategory() {
-        System.out.println("setCategory");
+        System.out.println("test method 3 : setCategory");
         String category = "";
         productBean instance = new productBean();
         instance.setCategory(category);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -96,13 +96,13 @@ public class productBeanTest {
      */
     @Test
     public void testGetSubcategory() {
-        System.out.println("getSubcategory");
+        System.out.println("test method 4 : getSubcategory");
         productBean instance = new productBean();
-        String expResult = "";
+        String expResult = null;
         String result = instance.getSubcategory();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -110,12 +110,12 @@ public class productBeanTest {
      */
     @Test
     public void testSetSubcategory() {
-        System.out.println("setSubcategory");
+        System.out.println("test method 5 : setSubcategory");
         String subcategory = "";
         productBean instance = new productBean();
         instance.setSubcategory(subcategory);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -123,13 +123,13 @@ public class productBeanTest {
      */
     @Test
     public void testGetName() {
-        System.out.println("getName");
+        System.out.println("test method 6 : getName");
         productBean instance = new productBean();
-        String expResult = "";
+        String expResult = null;
         String result = instance.getName();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -137,12 +137,12 @@ public class productBeanTest {
      */
     @Test
     public void testSetName() {
-        System.out.println("setName");
+        System.out.println("test method 7 : setName");
         String name = "";
         productBean instance = new productBean();
         instance.setName(name);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -150,13 +150,13 @@ public class productBeanTest {
      */
     @Test
     public void testGetPrice() {
-        System.out.println("getPrice");
+        System.out.println("test method 8 : getPrice");
         productBean instance = new productBean();
-        String expResult = "";
+        String expResult = null;
         String result = instance.getPrice();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -164,12 +164,12 @@ public class productBeanTest {
      */
     @Test
     public void testSetPrice() {
-        System.out.println("setPrice");
+        System.out.println("test method 9 : setPrice");
         String price = "";
         productBean instance = new productBean();
         instance.setPrice(price);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -177,13 +177,13 @@ public class productBeanTest {
      */
     @Test
     public void testGetQuantity() {
-        System.out.println("getQuantity");
+        System.out.println("test method 10 : getQuantity");
         productBean instance = new productBean();
-        String expResult = "";
+        String expResult = null;
         String result = instance.getQuantity();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -191,12 +191,12 @@ public class productBeanTest {
      */
     @Test
     public void testSetQuantity() {
-        System.out.println("setQuantity");
+        System.out.println("test method 11 : setQuantity");
         String quantity = "";
         productBean instance = new productBean();
         instance.setQuantity(quantity);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -204,13 +204,13 @@ public class productBeanTest {
      */
     @Test
     public void testGetTags() {
-        System.out.println("getTags");
+        System.out.println("test method 12 : getTags");
         productBean instance = new productBean();
-        String expResult = "";
+        String expResult = null;
         String result = instance.getTags();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -218,12 +218,12 @@ public class productBeanTest {
      */
     @Test
     public void testSetTags() {
-        System.out.println("setTags");
+        System.out.println("test method 13 : setTags");
         String tags = "";
         productBean instance = new productBean();
         instance.setTags(tags);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -231,13 +231,13 @@ public class productBeanTest {
      */
     @Test
     public void testGetSummary() {
-        System.out.println("getSummary");
+        System.out.println("test method 14 : getSummary");
         productBean instance = new productBean();
-        String expResult = "";
+        String expResult = null;
         String result = instance.getSummary();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -245,12 +245,12 @@ public class productBeanTest {
      */
     @Test
     public void testSetSummary() {
-        System.out.println("setSummary");
+        System.out.println("test method 15 : setSummary");
         String summary = "";
         productBean instance = new productBean();
         instance.setSummary(summary);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
     
 }

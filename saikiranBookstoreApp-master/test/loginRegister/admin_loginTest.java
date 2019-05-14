@@ -73,12 +73,12 @@ public class admin_loginTest {
     @Test
     public void testDoPost() throws Exception {
         System.out.println("doPost");
+        admin_login instance = new admin_login();
         HttpServletRequest request = null;
         HttpServletResponse response = null;
-        admin_login instance = new admin_login();
         instance.doPost(request, response);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -88,11 +88,11 @@ public class admin_loginTest {
     public void testGetServletInfo() {
         System.out.println("getServletInfo");
         admin_login instance = new admin_login();
-        String expResult = "";
+        String expResult = "Short description";
         String result = instance.getServletInfo();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
     
 }
