@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>admin_login.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;saikiranBookstoreApp&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">loginRegister</a> &gt; <span class="el_source">admin_login.java</span></div><h1>admin_login.java</h1><pre class="source lang-java linenums">/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package loginRegister;
+
+import admin.administrator;
+import database.DB_Conn;
+import helpers.SecureSHA1;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import user.user;
+
+/**
+ *
+ * @author chirag
+ */
+<span class="fc" id="L28">public class admin_login extends HttpServlet {</span>
+
+    /**
+     * Processes requests for both HTTP
+     * &lt;code&gt;GET&lt;/code&gt; and
+     * &lt;code&gt;POST&lt;/code&gt; methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+<span class="nc" id="L42">        response.setContentType(&quot;text/html;charset=UTF-8&quot;);</span>
+<span class="nc" id="L43">        PrintWriter out = response.getWriter();</span>
+        try {
+            /* TODO output your page here. You may use following sample code. */
+<span class="nc" id="L46">            out.println(&quot;&lt;html&gt;&quot;);</span>
+<span class="nc" id="L47">            out.println(&quot;&lt;head&gt;&quot;);</span>
+<span class="nc" id="L48">            out.println(&quot;&lt;title&gt;Servlet admin_login&lt;/title&gt;&quot;);            </span>
+<span class="nc" id="L49">            out.println(&quot;&lt;/head&gt;&quot;);</span>
+<span class="nc" id="L50">            out.println(&quot;&lt;body&gt;&quot;);</span>
+<span class="nc" id="L51">            out.println(&quot;&lt;h1&gt;Servlet admin_login at &quot; + request.getContextPath() + &quot;&lt;/h1&gt;&quot;);</span>
+<span class="nc" id="L52">            out.println(&quot;&lt;/body&gt;&quot;);</span>
+<span class="nc" id="L53">            out.println(&quot;&lt;/html&gt;&quot;);</span>
+        } finally {            
+<span class="nc" id="L55">            out.close();</span>
+<span class="nc" id="L56">        }</span>
+<span class="nc" id="L57">    }</span>
+
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;HttpServlet methods. Click on the + sign on the left to edit the code.&quot;&gt;
+    /**
+     * Handles the HTTP
+     * &lt;code&gt;GET&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+<span class="nc" id="L72">        processRequest(request, response);</span>
+<span class="nc" id="L73">    }</span>
+
+    /**
+     * Handles the HTTP
+     * &lt;code&gt;POST&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        //processRequest(request, response);//processRequest(request, response);
+        String email, pass;
+        String db_email, db_pass;
+<span class="fc" id="L90">        boolean isLoggedIn = false;</span>
+<span class="nc" id="L91">        HttpSession userSession = request.getSession();</span>
+<span class="nc" id="L92">        PrintWriter out = response.getWriter();</span>
+<span class="nc" id="L93">        email = request.getParameter(&quot;email&quot;);</span>
+<span class="nc" id="L94">        pass = request.getParameter(&quot;pass&quot;);</span>
+        String message, messageDetail;
+<span class="nc" id="L96">        message = &quot;&quot;;</span>
+<span class="nc" id="L97">        messageDetail = &quot;&quot;;</span>
+        
+<span class="nc" id="L99">        String messageUrl = &quot;/message.jsp&quot;;</span>
+<span class="nc" id="L100">        RequestDispatcher dispatchMessage =</span>
+<span class="nc" id="L101">                 request.getServletContext().getRequestDispatcher(messageUrl);</span>
+        
+        try {
+<span class="nc" id="L104">            pass = SecureSHA1.getSHA1(pass);</span>
+            //out.println(&quot;email &quot; + email + &quot; pass &quot; + pass);
+<span class="nc" id="L106">            DB_Conn con = new DB_Conn();</span>
+<span class="nc" id="L107">            Connection c = con.getConnection();</span>
+<span class="nc" id="L108">            String sqlGetUsers = &quot;SELECT * FROM  `administrators` ;&quot;;</span>
+
+<span class="nc" id="L110">            PreparedStatement st = c.prepareStatement(sqlGetUsers);</span>
+
+<span class="nc" id="L112">            ResultSet rs = st.executeQuery();</span>
+
+<span class="nc bnc" id="L114" title="All 2 branches missed.">            while (rs.next()) {</span>
+<span class="nc" id="L115">                db_email = rs.getString(&quot;email&quot;);</span>
+<span class="nc" id="L116">                db_pass = rs.getString(&quot;password&quot;);</span>
+
+<span class="nc bnc" id="L118" title="All 2 branches missed.">                if (email.equals(db_email)) {</span>
+<span class="nc" id="L119">                    message = &quot;Your email-id exists with us!&quot;;</span>
+                    //you exist with us
+<span class="nc bnc" id="L121" title="All 2 branches missed.">                    if (pass.equals(db_pass)) {</span>
+<span class="nc" id="L122">                        isLoggedIn = true;</span>
+                        //user exists and password is matching
+                        //out.print(&quot;You are logged in&quot;);
+<span class="nc" id="L125">                        user User = new user();</span>
+<span class="nc" id="L126">                        administrator Administrator = new administrator();</span>
+<span class="nc" id="L127">                        Administrator.setAdmin_email(db_email);</span>
+<span class="nc" id="L128">                        User.setUserEmail(email);</span>
+<span class="nc" id="L129">                        userSession.setAttribute(&quot;user&quot;, User);</span>
+<span class="nc" id="L130">                        userSession.setAttribute(&quot;admin&quot;, Administrator);</span>
+<span class="nc" id="L131">                        response.sendRedirect(request.getContextPath());</span>
+<span class="nc" id="L132">                      }</span>
+                    else {
+<span class="nc" id="L134">                        isLoggedIn = false;</span>
+                        // user exsts but wrong passwotd ask to CHANGE THE PASSWORD
+<span class="nc" id="L136">                        message = &quot;Wrong Password...!&quot;;</span>
+<span class="nc" id="L137">                        messageDetail = &quot;Password does not match with the password during registeration... Please re-login with correct password&quot;;</span>
+                        //out.println(&quot;wrong password Change the password now &lt;a href = 'changeMyPassword.jsp'&gt;Change&lt;/a&gt;&quot;);
+<span class="nc" id="L139">                        break;</span>
+                    }
+                }
+                else {
+                    //or there no such email YOu do not exist with us Create an account now!!
+                    //out.println(&quot; no such email Register an account now!&quot;);
+<span class="nc" id="L145">                    message = &quot;Not an Administrator&quot;;</span>
+<span class="nc" id="L146">                    messageDetail = &quot;You are currently not an Administrator!&quot;;</span>
+<span class="nc" id="L147">                    isLoggedIn = false;</span>
+                }
+            }
+            
+<span class="nc bnc" id="L151" title="All 2 branches missed.">            if (isLoggedIn == false){</span>
+<span class="nc" id="L152">                request.setAttribute(&quot;message&quot;, message);</span>
+<span class="nc" id="L153">                request.setAttribute(&quot;messageDetail&quot;, messageDetail);</span>
+<span class="nc" id="L154">                dispatchMessage.forward(request, response);</span>
+            }
+        } 
+<span class="nc" id="L157">        catch (SQLException e) {</span>
+<span class="nc" id="L158">            message = &quot;Error in the Login process&quot;;</span>
+<span class="nc" id="L159">                    messageDetail = &quot;There was an error in the process of login Please try after some time!&quot;;</span>
+                    
+<span class="nc" id="L161">            request.setAttribute(&quot;message&quot;, message);</span>
+<span class="nc" id="L162">            request.setAttribute(&quot;messageDetail&quot;, messageDetail);</span>
+            //dispatchMessage.forward(request, response);
+<span class="nc" id="L164">        } catch (Exception e) {</span>
+<span class="nc" id="L165">           message = &quot;Error in the Login process&quot;;</span>
+<span class="nc" id="L166">                    messageDetail = &quot;There was an error in the process of login Please try after some time!&quot;;</span>
+                  
+<span class="nc" id="L168">            request.setAttribute(&quot;message&quot;, message);</span>
+<span class="nc" id="L169">            request.setAttribute(&quot;messageDetail&quot;, messageDetail);</span>
+            //dispatchMessage.forward(request, response);
+<span class="nc" id="L171">        }</span>
+<span class="nc" id="L172">    }</span>
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+<span class="fc" id="L181">        return &quot;Short description&quot;;</span>
+    }// &lt;/editor-fold&gt;
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

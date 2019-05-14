@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>user.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;saikiranBookstoreApp&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">user</a> &gt; <span class="el_source">user.java</span></div><h1>user.java</h1><pre class="source lang-java linenums">/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package user;
+
+import database.DB_Conn;
+import java.sql.*;
+import java.util.Scanner;
+
+/**
+ *
+ * @author chirag
+ */
+<span class="fc" id="L15">public class user {</span>
+<span class="fc" id="L16">    public String userEmail = null;</span>
+<span class="fc" id="L17">    public int userId = 0;</span>
+    public String username;
+    public String address;
+    public String gender;
+    public String userImage;
+    public String mobileNum;
+    
+    Connection c;
+    
+    public void setUserEmail (String userEmail) throws SQLException, ClassNotFoundException{
+<span class="fc" id="L27">        this.userId = findUserId(userEmail);</span>
+<span class="fc" id="L28">        boolean fetchAllValues = fetchAllValues(getUserId());</span>
+<span class="fc" id="L29">        this.userEmail = userEmail;        </span>
+<span class="fc" id="L30">    }</span>
+    public String getUserEmail (){
+<span class="fc" id="L32">        return userEmail;</span>
+    }
+    public int getUserId (){
+<span class="fc" id="L35">        return userId;</span>
+    }
+    public String getUsername (){
+<span class="fc" id="L38">        return username;</span>
+    }
+    public String getAddress (){
+<span class="fc" id="L41">        return address;</span>
+    }
+    public String getGender (){
+<span class="fc" id="L44">        return gender;</span>
+    }
+    public String getMobileNum (){
+<span class="fc" id="L47">        return mobileNum;</span>
+    }
+    public String getUserImage (){
+<span class="fc" id="L50">        return userImage;</span>
+    }
+    
+    public int findUserId (String email) throws SQLException, ClassNotFoundException{
+<span class="fc" id="L54">        String sqlGetUserId = &quot;SELECT  `user_id` FROM  `user` WHERE  `email` =  ?&quot;;</span>
+<span class="fc" id="L55">        c= new DB_Conn().getConnection();</span>
+<span class="fc" id="L56">        PreparedStatement psmt  = c.prepareStatement(sqlGetUserId);</span>
+<span class="fc" id="L57">        psmt.setString(1, email);</span>
+<span class="fc" id="L58">        ResultSet executeQuery = psmt.executeQuery();</span>
+<span class="fc" id="L59">        executeQuery.next();</span>
+<span class="fc" id="L60">        userId = executeQuery.getInt(&quot;user_id&quot;);</span>
+<span class="fc" id="L61">        return userId;</span>
+    }
+    
+    public boolean fetchAllValues (int userId) throws SQLException, ClassNotFoundException{
+        // GETS ALL THE VALUES FROM THE TABLE user-deails
+        
+        String fetchSql;
+        boolean fetched;
+<span class="fc" id="L69">        fetchSql = &quot;SELECT * FROM  `user-details` WHERE  `user_id` =? ;&quot;;</span>
+<span class="fc" id="L70">        c = new DB_Conn() .getConnection();</span>
+        
+<span class="fc" id="L72">        PreparedStatement psmt = c.prepareStatement(fetchSql);</span>
+<span class="fc" id="L73">        psmt.setInt(1, userId);</span>
+        
+<span class="fc" id="L75">        ResultSet executeQuery = psmt.executeQuery();</span>
+<span class="fc" id="L76">        boolean next = executeQuery.next();</span>
+<span class="pc bpc" id="L77" title="1 of 2 branches missed.">        if (next){</span>
+<span class="fc" id="L78">            username = executeQuery.getString(&quot;username&quot;); </span>
+<span class="fc" id="L79">            address = executeQuery.getString(&quot;address&quot;);</span>
+<span class="fc" id="L80">            gender = executeQuery.getString(&quot;gender&quot;);</span>
+<span class="fc" id="L81">            userImage = executeQuery.getString(&quot;userImage&quot;);</span>
+<span class="fc" id="L82">            mobileNum = executeQuery.getString(&quot;mobile_no&quot;);</span>
+<span class="fc" id="L83">            fetched = true;</span>
+        }else {
+<span class="nc" id="L85">            username = null;</span>
+<span class="nc" id="L86">            address = null;</span>
+<span class="nc" id="L87">            gender = null;</span>
+<span class="nc" id="L88">            userImage = null;</span>
+<span class="nc" id="L89">            mobileNum = null;</span>
+<span class="nc" id="L90">            fetched = false;</span>
+        }
+       
+<span class="fc" id="L93">        return fetched;</span>
+    }
+    
+    public static void main (String args[]) throws SQLException, ClassNotFoundException{
+<span class="fc" id="L97">        System.out.println(&quot;Ok then gimme an email to give u an ID&quot;);</span>
+<span class="fc" id="L98">        Scanner sc = new Scanner (System.in);</span>
+<span class="nc" id="L99">        String next = sc.next();</span>
+<span class="nc" id="L100">        user user = new user ();</span>
+<span class="nc" id="L101">        user.setUserEmail(next);</span>
+<span class="nc" id="L102">        user.getUsername();</span>
+<span class="nc" id="L103">        System.out.println(&quot;Dude u have a email of an id &quot;+</span>
+<span class="nc" id="L104">        user.getUsername()+&quot; Address of &quot;+user.getAddress());</span>
+<span class="nc" id="L105">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

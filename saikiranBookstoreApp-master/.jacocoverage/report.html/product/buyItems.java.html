@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>buyItems.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;saikiranBookstoreApp&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">product</a> &gt; <span class="el_source">buyItems.java</span></div><h1>buyItems.java</h1><pre class="source lang-java linenums">/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package product;
+
+import cart.cart;
+import database.DB_Conn;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import user.user;
+
+/**
+ *
+ * @author chirag
+ */
+@WebServlet(name = &quot;buyItems&quot;, urlPatterns = {&quot;/buyItems&quot;})
+<span class="fc" id="L33">public class buyItems extends HttpServlet {</span>
+
+    /**
+     * Processes requests for both HTTP
+     * &lt;code&gt;GET&lt;/code&gt; and
+     * &lt;code&gt;POST&lt;/code&gt; methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+<span class="nc" id="L47">        response.setContentType(&quot;text/html;charset=UTF-8&quot;);</span>
+<span class="nc" id="L48">        PrintWriter out = response.getWriter();</span>
+        try {
+            /* TODO output your page here. You may use following sample code. */
+<span class="nc" id="L51">            out.println(&quot;&lt;html&gt;&quot;);</span>
+<span class="nc" id="L52">            out.println(&quot;&lt;head&gt;&quot;);</span>
+<span class="nc" id="L53">            out.println(&quot;&lt;title&gt;Servlet buyItems&lt;/title&gt;&quot;);</span>
+<span class="nc" id="L54">            out.println(&quot;&lt;/head&gt;&quot;);</span>
+<span class="nc" id="L55">            out.println(&quot;&lt;body&gt;&quot;);</span>
+<span class="nc" id="L56">            out.println(&quot;&lt;h1&gt;Servlet buyItems at &quot; + request.getContextPath() + &quot;&lt;/h1&gt;&quot;);</span>
+<span class="nc" id="L57">            out.println(&quot;&lt;/body&gt;&quot;);</span>
+<span class="nc" id="L58">            out.println(&quot;&lt;/html&gt;&quot;);</span>
+        } finally {
+<span class="nc" id="L60">            out.close();</span>
+<span class="nc" id="L61">        }</span>
+<span class="nc" id="L62">    }</span>
+
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;HttpServlet methods. Click on the + sign on the left to edit the code.&quot;&gt;
+    /**
+     * Handles the HTTP
+     * &lt;code&gt;GET&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        //processRequest(request, response);
+<span class="nc" id="L78">        doPost(request, response);</span>
+        /*
+         HttpSession session = request.getSession();
+         if (!(session.getAttribute(&quot;user&quot;) == null) &amp;&amp; !(session.getAttribute(&quot;cart&quot;) == null)) {
+
+         user User;
+         User = (user) session.getAttribute(&quot;user&quot;);
+         cart Cart;
+         Cart = (cart) session.getAttribute(&quot;cart&quot;);
+
+         PrintWriter out = response.getWriter();
+         try {
+         out.println(&quot;you user :&quot; + User.getUserEmail() + &quot; has bought items worth &quot; + Cart.getTotalPriceOfCart());
+
+
+         } catch (SQLException ex) {
+         Logger.getLogger(buyItems.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (ClassNotFoundException ex) {
+         Logger.getLogger(buyItems.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         } else {
+         response.sendRedirect(&quot;/MyCartApplication/index.jsp&quot;);
+         }
+         */
+<span class="nc" id="L102">    }</span>
+
+    /**
+     * Handles the HTTP
+     * &lt;code&gt;POST&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+<span class="nc" id="L117">        PrintWriter out = response.getWriter();</span>
+        //processRequest(request, response);
+
+        // THIS IS BUY SERVLET DOING THE FOLLOWING TASKS
+        /*
+         1. CREATE AN ORDER FOR THE CURRENT USER LOGGED IN
+         * GOT ALL THE INFORMATION ABOUT THE USER TO FINALLY FILL IN TH INDFORMATION
+         * 2. FIRE ON ORDER sql QUERY AND GET LATEST ORDER ID OF THE CURRENT USER
+         * 3. CREATE SALES TABLE ENTRIES AND FILL IN THE TABLE WITH SAME ORDER ID
+         * 4  FIRE SALES sql QUERY AND LIST THE APPROVAL AS PENDING
+         * 5  DECREMENT THE QUANTITY in the CART FROM products TABLE 
+                    
+         *  DONE REDIRECT BACK TO USER INFO
+         */
+
+
+
+        // GETTING ALL THE VALUES FROM THE USER
+        String name, age, address, mobile;
+        int order_id;
+<span class="nc" id="L137">        Connection c = null;</span>
+<span class="nc" id="L138">        HttpSession session = request.getSession();</span>
+        user User;
+<span class="nc" id="L140">        User = (user) session.getAttribute(&quot;user&quot;);</span>
+        cart Cart;
+<span class="nc" id="L142">        Cart = (cart) session.getAttribute(&quot;cart&quot;);</span>
+        
+<span class="nc" id="L144">        name = request.getParameter(&quot;name&quot;);</span>
+<span class="nc" id="L145">        age = request.getParameter(&quot;age&quot;);</span>
+<span class="nc" id="L146">        address = request.getParameter(&quot;address&quot;);</span>
+<span class="nc" id="L147">        mobile = request.getParameter(&quot;mobile&quot;);</span>
+        
+        
+<span class="nc bnc" id="L150" title="All 2 branches missed.">        if (name.trim().length() &gt; 1</span>
+<span class="nc bnc" id="L151" title="All 2 branches missed.">                &amp;&amp; address.trim().length() &gt;= 5</span>
+<span class="nc bnc" id="L152" title="All 2 branches missed.">                &amp;&amp; mobile.trim().length() &gt;= 5</span>
+<span class="nc bnc" id="L153" title="All 2 branches missed.">                &amp;&amp; mobile.trim().length() &lt;= 12) {</span>
+            
+<span class="nc bnc" id="L155" title="All 2 branches missed.">            if (!(session.getAttribute(&quot;user&quot;) == null)</span>
+<span class="nc bnc" id="L156" title="All 2 branches missed.">                    &amp;&amp; !(session.getAttribute(&quot;cart&quot;) == null)) {</span>
+                
+                try {
+<span class="nc" id="L159">                    response.setContentType(&quot;text/html;charset=UTF-8&quot;);</span>
+                    
+<span class="nc" id="L161">                    c = new DB_Conn().getConnection();</span>
+                    
+                    //******* Starting a Transaction
+<span class="nc" id="L164">                    c.setAutoCommit(false);</span>
+                    String insertOrder;
+<span class="nc" id="L166">                    insertOrder = &quot;    INSERT INTO  `saikiran enterprises`.`order` (&quot;</span>
+                            + &quot;    `order_id` ,&quot;
+                            + &quot;    `user_id` ,&quot;
+                            + &quot;    `status` ,&quot;
+                            + &quot;    `shippers_name` ,&quot;
+                            + &quot;    `address` ,&quot;
+                            + &quot;    `mobile_number` ,&quot;
+                            + &quot;    `shippers_email` ,&quot;
+                            + &quot;    `ordered_On` ,&quot;
+                            + &quot;    `total_order_price`&quot;
+                            + &quot;    )&quot;
+                            + &quot;    VALUES (&quot;
+                            + &quot;    NULL ,  ?,  'pending',  ?,  ?,  ?, ?, NOW( ) ,  ?&quot;
+                            + &quot;    );&quot;;
+                    
+<span class="nc" id="L181">                    PreparedStatement preparedSQL1 =</span>
+<span class="nc" id="L182">                            c.prepareStatement(insertOrder);</span>
+                    
+<span class="nc" id="L184">                    preparedSQL1.setInt(1, User.getUserId()); // user iD</span>
+
+<span class="nc" id="L186">                    preparedSQL1.setString(2, name); //`shippers_name` </span>
+
+<span class="nc" id="L188">                    preparedSQL1.setString(3, address); //`address` </span>
+
+<span class="nc" id="L190">                    preparedSQL1.setString(4, mobile); //`mobile` </span>
+
+<span class="nc" id="L192">                    preparedSQL1.setString(5, User.getUserEmail()); //`shippers_email` </span>
+
+<span class="nc" id="L194">                    preparedSQL1.setDouble(6, Cart.getTotalPriceOfCart()); //`total_order_price`` </span>
+
+<span class="nc" id="L196">                    int executeUpdatePreparedSQL1 = preparedSQL1.executeUpdate();</span>
+                    
+<span class="nc bnc" id="L198" title="All 2 branches missed.">                    if (executeUpdatePreparedSQL1 == 1) {</span>
+                        //get the latest order id of the recent update
+
+                        //out.println(&quot;Ok here we are onr order updted&quot;);
+<span class="nc" id="L202">                        String getLatestOrderId = &quot;SELECT  `order_id` &quot;</span>
+                                + &quot;FROM  `order` &quot;
+<span class="nc" id="L204">                                + &quot;WHERE  `user_id` = &quot; + User.getUserId() + &quot; &quot;</span>
+                                + &quot;ORDER BY  `ordered_On` DESC; &quot;
+                                + &quot;&quot;;
+                        
+<span class="nc" id="L208">                        preparedSQL1.close();</span>
+                        
+<span class="nc" id="L210">                        Statement st = c.createStatement();</span>
+<span class="nc" id="L211">                        ResultSet executeQueryGetOrderId = st.executeQuery(getLatestOrderId);</span>
+<span class="nc" id="L212">                        executeQueryGetOrderId.next();</span>
+
+                        //Here we get the latest order id for the current user
+<span class="nc" id="L215">                        order_id = executeQueryGetOrderId.getInt(&quot;order_id&quot;);</span>
+                        
+<span class="nc" id="L217">                        executeQueryGetOrderId.close();</span>
+
+                        //out.println(&quot;you user :&quot; + User.getUserEmail() + &quot; has bought items worth &quot; + Cart.getTotalPriceOfCart() + &quot;gffdgfgvgedfrggfdre and order id of &quot; + order_id);
+
+<span class="nc" id="L221">                        ArrayList&lt;String&gt; productCategorys = Cart.getProductCategorys();</span>
+<span class="nc" id="L222">                        ArrayList&lt;String&gt; productNames = Cart.getProductNames();</span>
+<span class="nc" id="L223">                        ArrayList&lt;Double&gt; prices = Cart.getPrices();</span>
+<span class="nc" id="L224">                        ArrayList&lt;Integer&gt; qty = Cart.getQty();</span>
+<span class="nc" id="L225">                        ArrayList&lt;Integer&gt; id = Cart.getId();</span>
+                        
+<span class="nc" id="L227">                        String insertIntoSalesSQL3 = &quot;&quot;</span>
+                                + &quot;INSERT INTO  `saikiran enterprises`.`sales` (&quot;
+                                + &quot;`sales_id` ,&quot;
+                                + &quot;`order_id` ,&quot;
+                                + &quot;`product_id` ,&quot;
+                                + &quot;`product_name` ,&quot;
+                                + &quot;`product_price` ,&quot;
+                                + &quot;`product_quantity` ,&quot;
+                                + &quot;`sold_on` ,&quot;
+                                + &quot;`user_id`&quot;
+                                + &quot;)&quot;
+                                + &quot;VALUES (&quot;
+                                + &quot;    NULL ,  ?,  ?,  ?,  ?,  ?, NOW( ) ,  ? &quot;
+                                + &quot;       );&quot;;
+                        
+<span class="nc" id="L242">                        PreparedStatement insertIntoSalesTable = c.prepareStatement(insertIntoSalesSQL3);</span>
+                        
+<span class="nc bnc" id="L244" title="All 2 branches missed.">                        for (int i = 0; i &lt; productNames.size(); i++) {</span>
+                            
+<span class="nc" id="L246">                            insertIntoSalesTable.setInt(1, order_id);</span>
+                            
+<span class="nc" id="L248">                            insertIntoSalesTable.setInt(2, id.get(i));</span>
+                            
+<span class="nc" id="L250">                            insertIntoSalesTable.setString(3, productNames.get(i));</span>
+                            
+<span class="nc" id="L252">                            insertIntoSalesTable.setDouble(4, prices.get(i));</span>
+                            
+<span class="nc" id="L254">                            insertIntoSalesTable.setInt(5, qty.get(i));</span>
+                            
+<span class="nc" id="L256">                            insertIntoSalesTable.setInt(6, User.getUserId());</span>
+                            
+<span class="nc" id="L258">                            int executeUpdateSalesTable = insertIntoSalesTable.executeUpdate();</span>
+                            
+<span class="nc bnc" id="L260" title="All 2 branches missed.">                            if (executeUpdateSalesTable == 1) {</span>
+<span class="nc" id="L261">                                out.println(&quot;Success&quot;);</span>
+                                
+                            } else {
+<span class="nc" id="L264">                                out.println(&quot;Failed for now Product name &quot; + productNames.get(i));</span>
+                            }
+                        }
+                        //DECREMENT THE QUANTITY in the CART FROM products TABLE 
+                    /*
+
+
+                         UPDATE  `products` 
+                         SET 
+                         `product_qty` =  `product_qty` - 3
+                         WHERE  `products`.`product_id` = 1 
+
+                         UPDATE  `products` 
+                         SET 
+                         `product_qty` =  `product_qty` - 3
+                         WHERE  `products`.`product_id` = 1 
+                         AND
+                         `product-name` = 'Assassins Creed'
+
+                         */
+                        
+<span class="nc bnc" id="L285" title="All 2 branches missed.">                        for (int i = 0; i &lt; productNames.size(); i++) {</span>
+<span class="nc" id="L286">                            st.addBatch(</span>
+                                    &quot; UPDATE  `products` &quot;
+                                    + &quot; SET &quot;
+<span class="nc" id="L289">                                    + &quot;`product_qty` =  `product_qty` - &quot; + qty.get(i) + &quot;&quot;</span>
+<span class="nc" id="L290">                                    + &quot; WHERE  `products`.`product_id` = &quot; + id.get(i) + &quot; &quot;</span>
+                                    + &quot; AND &quot;
+<span class="nc" id="L292">                                    + &quot; `product-name` = '&quot; + productNames.get(i) + &quot;' &quot;);</span>
+                            
+                        }
+<span class="nc" id="L295">                        int[] executeBatch = st.executeBatch();</span>
+<span class="nc" id="L296">                        int i = 0;</span>
+<span class="nc bnc" id="L297" title="All 2 branches missed.">                        while (i &lt; executeBatch.length) {</span>
+<span class="nc" id="L298">                            out.print(&quot;? --&gt; &quot; + executeBatch[i]);</span>
+<span class="nc" id="L299">                            i++;</span>
+                        }
+<span class="nc" id="L301">                        c.commit();</span>
+<span class="nc" id="L302">                        response.sendRedirect(request.getContextPath()+&quot;/userinfo.jsp&quot;);</span>
+                        
+<span class="nc" id="L304">                    } else {</span>
+                        //not updated
+<span class="nc" id="L306">        response.sendRedirect(request.getContextPath());</span>
+                    }
+                    
+<span class="nc" id="L309">                } catch (SQLException ex) {</span>
+                            try {
+<span class="nc" id="L311">                            Logger.getLogger(buyItems.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L312">                            c.rollback();  </span>
+                            String message, messageDetail;
+<span class="nc" id="L314">                            String messageUrl = &quot;/message.jsp&quot;;</span>
+<span class="nc" id="L315">                            RequestDispatcher dispatchMessage =</span>
+<span class="nc" id="L316">                                 request.getServletContext().getRequestDispatcher(messageUrl);</span>
+<span class="nc" id="L317">                            message = &quot;Oops, Less Product Stock...!&quot;;</span>
+<span class="nc" id="L318">                            messageDetail = &quot;We see that your demand for the product was critically higher than what we had in our inventory, We respect your purchase but your purchase was cancelled, We are sorry, but please in a urgent requirement do order less stock right now!!&quot;;</span>
+<span class="nc" id="L319">                            request.setAttribute(&quot;message&quot;, message);</span>
+<span class="nc" id="L320">                            request.setAttribute(&quot;messageDetail&quot;, messageDetail);</span>
+<span class="nc" id="L321">                            dispatchMessage.forward(request, response);</span>
+                                            //response.sendError(500);
+                            
+                                //response.sendRedirect(&quot;/saikiranBookstoreApp/buyItems.jsp&quot;);
+<span class="nc" id="L325">                            } catch (SQLException ex1) {</span>
+                                //Logger.getLogger(buyItems.class.getName()).log(Level.SEVERE, null, ex1);
+                                
+                            String message, messageDetail;
+<span class="nc" id="L329">                            String messageUrl = &quot;/message.jsp&quot;;</span>
+<span class="nc" id="L330">                            RequestDispatcher dispatchMessage =</span>
+<span class="nc" id="L331">                                 request.getServletContext().getRequestDispatcher(messageUrl);</span>
+<span class="nc" id="L332">                            message = &quot;Oops, Less Product Stock...!&quot;;</span>
+<span class="nc" id="L333">                            messageDetail = &quot;We see that your demand for the product was critically higher than what we had in our inventory, We respect your purchase but your purchase was cancelled, We are sorry, but please in a urgent requirement do order less stock right now!!&quot;;</span>
+<span class="nc" id="L334">                            request.setAttribute(&quot;message&quot;, message);</span>
+<span class="nc" id="L335">                            request.setAttribute(&quot;messageDetail&quot;, messageDetail);</span>
+<span class="nc" id="L336">                            dispatchMessage.forward(request, response);</span>
+                                            //response.sendError(500);
+<span class="nc" id="L338">                            }</span>
+<span class="nc" id="L339">                } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L340">                    out.println(&quot;you user &quot; + ex);</span>
+                    //response.sendRedirect(&quot;/saikiranBookstoreApp/buyItems.jsp&quot;);
+                    
+<span class="nc" id="L343">                }</span>
+<span class="nc" id="L344">                session.removeAttribute(&quot;cart&quot;);</span>
+            } else {
+                //response.sendRedirect(&quot;/saikiranBookstoreApp/index.jsp&quot;);
+<span class="nc" id="L347">                out.println (&quot;No items in cart&quot;);</span>
+            }
+            
+        } else {
+            //response.sendRedirect(&quot;/saikiranBookstoreApp/buyItems.jsp&quot;);
+<span class="nc" id="L352">            out.println (&quot;NOt validated&quot;);</span>
+        }
+        
+<span class="nc" id="L355">    }</span>
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+<span class="fc" id="L364">        return &quot;Short description&quot;;</span>
+    }// &lt;/editor-fold&gt;
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

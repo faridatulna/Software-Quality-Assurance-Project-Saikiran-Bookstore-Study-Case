@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>registerServlet.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;saikiranBookstoreApp&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">admin</a> &gt; <span class="el_source">registerServlet.java</span></div><h1>registerServlet.java</h1><pre class="source lang-java linenums">/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package admin;
+
+import loginRegister.*;
+import database.DB_Conn;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import helpers.*;
+import java.sql.*;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpSession;
+import user.user;
+
+/**
+ *
+ * @author chirag
+ */
+<span class="fc" id="L25">public class registerServlet extends HttpServlet {</span>
+
+    /**
+     * Processes requests for both HTTP
+     * &lt;code&gt;GET&lt;/code&gt; and
+     * &lt;code&gt;POST&lt;/code&gt; methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+<span class="nc" id="L39">        response.setContentType(&quot;text/html;charset=UTF-8&quot;);</span>
+<span class="nc" id="L40">        PrintWriter out = response.getWriter();</span>
+        try {
+            /*
+             * TODO output your page here. You may use following sample code.
+             */
+<span class="nc" id="L45">            out.println(&quot;&lt;html&gt;&quot;);</span>
+<span class="nc" id="L46">            out.println(&quot;&lt;head&gt;&quot;);</span>
+<span class="nc" id="L47">            out.println(&quot;&lt;title&gt;Servlet registerServlet&lt;/title&gt;&quot;);</span>
+<span class="nc" id="L48">            out.println(&quot;&lt;/head&gt;&quot;);</span>
+<span class="nc" id="L49">            out.println(&quot;&lt;body&gt;&quot;);</span>
+<span class="nc" id="L50">            out.println(&quot;&lt;h1&gt;Servlet registerServlet at &quot; + request.getContextPath() + &quot;&lt;/h1&gt;&quot;);</span>
+<span class="nc" id="L51">            out.println(&quot;&lt;/body&gt;&quot;);</span>
+<span class="nc" id="L52">            out.println(&quot;&lt;/html&gt;&quot;);</span>
+        } finally {
+<span class="nc" id="L54">            out.close();</span>
+<span class="nc" id="L55">        }</span>
+<span class="nc" id="L56">    }</span>
+
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;HttpServlet methods. Click on the + sign on the left to edit the code.&quot;&gt;
+    /**
+     * Handles the HTTP
+     * &lt;code&gt;GET&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+<span class="nc" id="L71">        processRequest(request, response);</span>
+<span class="nc" id="L72">    }</span>
+
+    /**
+     * Handles the HTTP
+     * &lt;code&gt;POST&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        //processRequest(request, response);
+
+        String message, messageDetail;
+<span class="fc" id="L89">        message = null;</span>
+<span class="fc" id="L90">        messageDetail = null;</span>
+        String email, pass, passAgain;
+<span class="fc" id="L92">        boolean isRegistered = false;</span>
+
+<span class="fc" id="L94">        String messageUrl = &quot;/message.jsp&quot;;</span>
+<span class="fc" id="L95">        RequestDispatcher dispatchMessage =</span>
+<span class="nc" id="L96">                request.getServletContext().getRequestDispatcher(messageUrl);</span>
+
+<span class="nc" id="L98">        email = request.getParameter(&quot;email&quot;);</span>
+<span class="nc" id="L99">        pass = request.getParameter(&quot;pass&quot;);</span>
+<span class="nc" id="L100">        passAgain = request.getParameter(&quot;passAgain&quot;);</span>
+<span class="nc" id="L101">        EmailValidator validator = new EmailValidator();</span>
+<span class="nc" id="L102">        boolean isEmailValid = validator.validate(email);</span>
+
+<span class="nc" id="L104">        String ipAdd = request.getRemoteAddr();</span>
+
+<span class="nc" id="L106">        PrintWriter out = response.getWriter();</span>
+
+<span class="nc" id="L108">        HttpSession userSession = request.getSession();</span>
+
+        try {
+<span class="nc" id="L111">            DB_Conn con = new DB_Conn();</span>
+<span class="nc" id="L112">            Connection c = con.getConnection();</span>
+<span class="nc bnc" id="L113" title="All 4 branches missed.">            if ((request.getParameter(&quot;email&quot;) != null) || (request.getParameter(&quot;email&quot;) != null)){</span>
+<span class="nc bnc" id="L114" title="All 2 branches missed.">                if (isEmailValid) {</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">                    if (pass.length() &gt; 7) {</span>
+<span class="nc bnc" id="L116" title="All 2 branches missed.">                        if (pass.equals(passAgain)) {</span>
+                            // then the user is registered and a session is 
+
+<span class="nc" id="L119">                            String sql = &quot;INSERT INTO  `saikiran enterprises`.`user` &quot;</span>
+                                    + &quot;(`user_id` ,`email` ,`pass` ,`registeredOn`) &quot;
+                                    + &quot;VALUES (NULL ,  ?, SHA1(  ? ) , NOW( )); &quot;;
+
+<span class="nc" id="L123">                            PreparedStatement psmt = c.prepareStatement(sql);</span>
+
+<span class="nc" id="L125">                            psmt.setString(1, email);</span>
+
+<span class="nc" id="L127">                            psmt.setString(2, pass);</span>
+
+<span class="nc" id="L129">                            int i = psmt.executeUpdate();</span>
+
+<span class="nc bnc" id="L131" title="All 2 branches missed.">                            if (i == 1) {</span>
+<span class="nc" id="L132">                                isRegistered = true;</span>
+<span class="nc" id="L133">                                out.println(&quot;You are registered &quot;);</span>
+<span class="nc" id="L134">                                user User = new user();</span>
+<span class="nc" id="L135">                                User.setUserEmail(email);</span>
+<span class="nc" id="L136">                                userSession.setAttribute(&quot;user&quot;, User);</span>
+<span class="nc" id="L137">                                response.sendRedirect(&quot;/saikiranBookstoreApp/index.jsp&quot;);</span>
+<span class="nc" id="L138">                            } else {</span>
+<span class="nc" id="L139">                                isRegistered = false;</span>
+<span class="nc" id="L140">                                out.println(&quot;You are not registered&quot;);</span>
+                            }
+
+<span class="nc" id="L143">                        } //Else both passwords do not match</span>
+                        else {
+<span class="nc" id="L145">                            isRegistered = false;</span>
+<span class="nc" id="L146">                            message = &quot;Passwords do not match&quot;;</span>
+<span class="nc" id="L147">                            messageDetail = &quot;Please provide a matching passwords&quot;;</span>
+<span class="nc" id="L148">                            out.print(&quot; nOT Success!  both passwords do not match!&quot;);</span>
+
+                        }
+                    } //or the paasword length is less than 7
+                    else {
+<span class="nc" id="L153">                        isRegistered = false;</span>
+<span class="nc" id="L154">                        message = &quot;Password length is less than 7 characters&quot;;</span>
+<span class="nc" id="L155">                        messageDetail = &quot;Please provide a passwords that has password length of minimum of seven alphanumeric characters&quot;;</span>
+<span class="nc" id="L156">                        out.print(&quot; nOT Success!! the paasword length is less than 7&quot;);</span>
+                    }
+                } //or email is wrong
+                else {
+<span class="nc" id="L160">                    isRegistered = false;</span>
+<span class="nc" id="L161">                    message = &quot;No email address typed&quot;;</span>
+<span class="nc" id="L162">                    messageDetail = &quot;Please provide a valid email address&quot;;</span>
+<span class="nc" id="L163">                    out.print(&quot; nOT Success!! email is wrong&quot;);</span>
+                }
+            }
+            else {
+<span class="nc" id="L167">                isRegistered = false;</span>
+<span class="nc" id="L168">                message = &quot;Please enter values&quot;;</span>
+<span class="nc" id="L169">                messageDetail = &quot;Please provide an email address. Your account currently is not registered&quot;;</span>
+            }
+            
+<span class="nc bnc" id="L172" title="All 2 branches missed.">            if (isRegistered == false) {</span>
+<span class="nc" id="L173">                request.setAttribute(&quot;message&quot;, message);</span>
+<span class="nc" id="L174">                request.setAttribute(&quot;messageDetail&quot;, messageDetail);</span>
+<span class="nc" id="L175">                dispatchMessage.forward(request, response);</span>
+            }
+
+            //try ends here
+<span class="nc" id="L179">        } catch (SQLIntegrityConstraintViolationException ex) {</span>
+            // user exsts but wrong passwotd ask to CHANGE THE PASSWORD
+<span class="nc" id="L181">            messageDetail = ex.getMessage();</span>
+<span class="nc" id="L182">            message = &quot;You have been registered earlier please try your right password again, else change your password...&lt;a href=''&gt;Change My Password&lt;/a&gt;&quot;;</span>
+<span class="nc" id="L183">            out.print(&quot; nOT Success!!&quot; + ex);</span>
+<span class="nc" id="L184">            request.setAttribute(&quot;message&quot;, message);</span>
+<span class="nc" id="L185">            request.setAttribute(&quot;messageDetail&quot;, messageDetail);</span>
+<span class="nc" id="L186">            dispatchMessage.forward(request, response);</span>
+<span class="nc" id="L187">        } catch (Exception ex) {</span>
+<span class="nc" id="L188">            messageDetail = ex.getMessage();</span>
+<span class="nc" id="L189">            message = &quot;There was a problem in registering your account please do retry again later...&quot;;</span>
+<span class="nc" id="L190">            out.print(&quot; nOT Success!!&quot; + ex);</span>
+<span class="nc" id="L191">            request.setAttribute(&quot;message&quot;, message);</span>
+<span class="nc" id="L192">            request.setAttribute(&quot;messageDetail&quot;, messageDetail);</span>
+<span class="nc" id="L193">            dispatchMessage.forward(request, response);</span>
+<span class="nc" id="L194">        }</span>
+<span class="nc" id="L195">    }</span>
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+<span class="fc" id="L204">        return &quot;Short description&quot;;</span>
+    }// &lt;/editor-fold&gt;
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

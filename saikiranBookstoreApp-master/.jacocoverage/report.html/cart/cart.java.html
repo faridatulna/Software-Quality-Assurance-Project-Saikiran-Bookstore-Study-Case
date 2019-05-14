@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>cart.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;saikiranBookstoreApp&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">cart</a> &gt; <span class="el_source">cart.java</span></div><h1>cart.java</h1><pre class="source lang-java linenums">/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package cart;
+
+import java.sql.*;
+import java.util.*;
+
+/**
+ *
+ * @author chirag
+ */
+<span class="fc" id="L14">public class cart {</span>
+
+<span class="fc" id="L16">    public ArrayList&lt;Integer&gt; id = new ArrayList();</span>
+<span class="fc" id="L17">    public ArrayList&lt;String&gt; productCategory = new ArrayList();</span>
+<span class="fc" id="L18">    public ArrayList&lt;String&gt; productName = new ArrayList();</span>
+<span class="fc" id="L19">    public ArrayList&lt;Double&gt; prices = new ArrayList();</span>
+<span class="fc" id="L20">    public ArrayList&lt;Integer&gt; qty = new ArrayList();</span>
+    
+    
+<span class="fc" id="L23">    public ArrayList&lt;String&gt; res = new ArrayList();</span>
+    Connection c;
+    //this method will genarate &quot;res&quot; with colons
+
+    public ArrayList&lt;String&gt; showProducts() {
+<span class="pc bpc" id="L28" title="1 of 2 branches missed.">        for (int i = 0; i &lt; this.id.size(); i++) {</span>
+            // Try to concatinate the quantity and id by colon (:)
+<span class="nc" id="L30">            System.out.println(qty.get(i) + &quot; &quot; + id.get(i) + &quot; &quot;);</span>
+<span class="nc" id="L31">            res.add(qty.get(i) + &quot;:&quot; + id.get(i));</span>
+        }
+        // RES Contains How many things? (Qty) : Of what? (Item)
+<span class="fc" id="L34">        return res;</span>
+    }
+
+    //this method will genarate the prices of produt names which have an id
+    public void listItemsOfCart() throws SQLException, ClassNotFoundException {
+
+<span class="fc" id="L40">        c = new DB_Conn().getConnection();</span>
+<span class="fc" id="L41">        Statement st = c.createStatement();</span>
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">        for (int i = 0; i &lt; id.size(); i++) {</span>
+<span class="nc" id="L43">            Integer getItemId = id.get(i);</span>
+<span class="nc" id="L44">            String getItemName = &quot;SELECT  `product-name` ,  `category-name` ,  `price` FROM  `products` WHERE  `product_id` =&quot; + getItemId + &quot;&quot;;</span>
+            /*
+             SELECT  `product-name` ,  `category-name` ,  `price` 
+             FROM  `products` 
+             WHERE  `product_id` =1
+             */
+<span class="nc" id="L50">            ResultSet rs = st.executeQuery(getItemName);</span>
+<span class="nc" id="L51">            rs.next();</span>
+<span class="nc" id="L52">            String p_name = rs.getString(&quot;product-name&quot;);</span>
+<span class="nc" id="L53">            Double p_price = rs.getDouble(&quot;price&quot;);</span>
+<span class="nc" id="L54">            String p_Category = rs.getString(&quot;category-name&quot;);</span>
+
+<span class="nc" id="L56">            productName.add(p_name);</span>
+<span class="nc" id="L57">            productCategory.add(p_Category);</span>
+<span class="nc" id="L58">            prices.add(p_price);</span>
+        }
+<span class="fc" id="L60">    }</span>
+
+    public ArrayList&lt;String&gt; getProductCategorys() {
+<span class="fc" id="L63">        return productCategory;</span>
+    }
+
+    //getters for product names, prices 
+    public ArrayList&lt;String&gt; getProductNames() throws SQLException, ClassNotFoundException {
+        /*for (int i=0;i&lt;productName.size();i++){
+         System.out.println(&quot;&quot;+productName.get(i));
+         }*/
+<span class="fc" id="L71">        return productName;</span>
+    }
+    //this will return a list
+
+    public ArrayList&lt;Double&gt; getPrices() throws SQLException, ClassNotFoundException {
+        /*for (int i=0;i&lt;prices.size();i++){
+         System.out.println(&quot;&quot;+prices.get(i));
+         }*/
+<span class="fc" id="L79">        listItemsOfCart();</span>
+<span class="fc" id="L80">        return prices;</span>
+    }
+
+    public String getProductName(int id) throws SQLException, ClassNotFoundException {
+        //String p_name = productName.get(id);
+        //return p_name;
+<span class="fc" id="L86">        c = new DB_Conn().getConnection();</span>
+<span class="fc" id="L87">        String getProductName = &quot;SELECT  `product-name` FROM  `products` WHERE  `product_id` =&quot; + id + &quot;&quot;;</span>
+<span class="fc" id="L88">        Statement st = c.createStatement();</span>
+
+<span class="fc" id="L90">        ResultSet rs = st.executeQuery(getProductName);</span>
+<span class="fc" id="L91">        rs.next();</span>
+<span class="fc" id="L92">        String name = rs.getString(&quot;product-name&quot;);</span>
+<span class="fc" id="L93">        return name;</span>
+    }
+
+    public String getProductCategory(int id) throws SQLException, ClassNotFoundException {
+        //String p_name = productName.get(id);
+        //return p_name;
+<span class="fc" id="L99">        c = new DB_Conn().getConnection();</span>
+<span class="fc" id="L100">        String getCategoryName = &quot;SELECT   `category-name`  FROM  `products` WHERE  `product_id` =&quot; + id + &quot;&quot;;</span>
+<span class="fc" id="L101">        Statement st = c.createStatement();</span>
+        /*SELECT  `category-name` 
+         FROM  `products` 
+         WHERE  `product_id` =1*/
+<span class="fc" id="L105">        ResultSet rs = st.executeQuery(getCategoryName);</span>
+<span class="fc" id="L106">        rs.next();</span>
+<span class="fc" id="L107">        String name = rs.getString(&quot;category-name&quot;);</span>
+<span class="fc" id="L108">        return name;</span>
+    }
+
+    public double getProductPrice(int id) throws SQLException, ClassNotFoundException {
+<span class="fc" id="L112">        c = new DB_Conn().getConnection();</span>
+<span class="fc" id="L113">        String getProductName = &quot;SELECT  `price` FROM  `products` WHERE  `product_id` =&quot; + id + &quot;&quot;;</span>
+<span class="fc" id="L114">        Statement st = c.createStatement();</span>
+<span class="fc" id="L115">        ResultSet rs = st.executeQuery(getProductName);</span>
+<span class="fc" id="L116">        rs.next();</span>
+<span class="fc" id="L117">        double price = rs.getDouble(&quot;price&quot;);</span>
+<span class="fc" id="L118">        return price;</span>
+    }
+
+    public double getTotalPriceOfCart() throws SQLException, ClassNotFoundException {
+<span class="fc" id="L122">        ArrayList&lt;Double&gt; t_prices = new ArrayList(); //this will hold the prices</span>
+
+        //Step 1: GET THE &quot;ids&quot; inside the arraylist, 
+        //Step 2:  find the corresponding matching price
+        //Step 3:  multiply with the &quot;qty&quot;
+
+        // ids (Product name) =&gt; retrieve price (Store it) =&gt; Multiply by *qty
+
+<span class="fc" id="L130">        c = new DB_Conn().getConnection();</span>
+<span class="fc" id="L131">        Statement st = c.createStatement();</span>
+<span class="pc bpc" id="L132" title="1 of 2 branches missed.">        for (int i = 0; i &lt; id.size(); i++) {</span>
+<span class="nc" id="L133">            String sqlGetPrice = &quot;SELECT  `price` FROM  `products` WHERE  `product_id` =&quot; + id.get(i).toString() + &quot;;&quot;;</span>
+<span class="nc" id="L134">            ResultSet rs = st.executeQuery(sqlGetPrice);</span>
+<span class="nc" id="L135">            rs.next();</span>
+            //theres only one value in resultset so go one step further and get the value
+<span class="nc" id="L137">            double f = rs.getFloat(&quot;price&quot;);</span>
+            // Multiply by the quantity 
+<span class="nc" id="L139">            f *= qty.get(i);</span>
+            // Add that multiplied value to prices list
+<span class="nc" id="L141">            t_prices.add(f);</span>
+        }
+
+<span class="fc" id="L144">        double sum = 0;</span>
+<span class="pc bpc" id="L145" title="1 of 2 branches missed.">        for (int i = 0; i &lt; t_prices.size(); i++) {</span>
+<span class="nc" id="L146">            double p = t_prices.get(i);</span>
+<span class="nc" id="L147">            sum += p;</span>
+        }
+        //System.out.println(&quot;Sum of your cart is &quot;+ sum);
+<span class="fc" id="L150">        return sum;</span>
+    }
+
+    public ArrayList&lt;Integer&gt; getQty() {
+<span class="fc" id="L154">        return qty;</span>
+    }
+
+    public ArrayList&lt;Integer&gt; getId() {
+<span class="fc" id="L158">        return id;</span>
+    }
+
+    public boolean addProduct(int id) throws SQLException, ClassNotFoundException {
+        boolean added, matches;
+        //Step 1 : check for ids in DATABASE
+        //Step 2 : Match the given id with database
+        //          Matched -&gt; break and mtches = 1
+
+<span class="fc" id="L167">        c = new DB_Conn().getConnection();</span>
+<span class="fc" id="L168">        Statement st = c.createStatement();</span>
+
+<span class="fc" id="L170">        String sqlGetValidIds = &quot;SELECT  `product_id` FROM  `products`;&quot;;</span>
+<span class="fc" id="L171">        ResultSet rs = st.executeQuery(sqlGetValidIds);</span>
+
+<span class="pc bpc" id="L173" title="1 of 2 branches missed.">        while (rs.next()) {</span>
+<span class="fc" id="L174">            int id_db = rs.getInt(&quot;product_id&quot;);</span>
+<span class="pc bpc" id="L175" title="1 of 2 branches missed.">            if (id_db == id) {</span>
+                // id matches in the database 
+<span class="fc" id="L177">                matches = true;</span>
+<span class="fc" id="L178">                break;</span>
+            }
+<span class="nc" id="L180">        }</span>
+
+        // here we get is a valid id
+
+        // STEP 3 : if arraylist contains the same id Do not insert
+        //          increment the qty, else insert into id &amp; qty
+<span class="pc bpc" id="L186" title="1 of 2 branches missed.">        if (matches = true) {</span>
+            //inserti nto arraylist
+<span class="pc bpc" id="L188" title="1 of 2 branches missed.">            if (this.id.contains(id)) {</span>
+                //increment the quantity at where the product id resides
+<span class="nc" id="L190">                int index = this.id.indexOf(id);</span>
+<span class="nc" id="L191">                this.qty.set(index, this.qty.get(index) + 1);</span>
+<span class="nc" id="L192">            } else {</span>
+                //Add one qty
+<span class="fc" id="L194">                this.qty.add(1);</span>
+                //Add productID
+<span class="fc" id="L196">                this.id.add(id);</span>
+            }
+<span class="fc" id="L198">            added = true;</span>
+        } else {
+            //get out the function
+            //Because no product in in the db with that id
+<span class="nc" id="L202">            System.out.println(&quot;No product with that id exist in database&quot;);</span>
+<span class="nc" id="L203">            added = false;</span>
+        }
+<span class="fc" id="L205">        return added;</span>
+    }
+
+    public boolean removeProduct(int productId) {
+        boolean removed;
+        
+<span class="pc bpc" id="L211" title="1 of 2 branches missed.">        if (this.id.contains(productId)) {</span>
+            //where is the id's position
+            //this.id.indexOf(productId);
+<span class="nc" id="L214">            int index = this.id.indexOf(productId);</span>
+<span class="nc" id="L215">            int quantity = this.qty.get(index);</span>
+                //remove the entire stack from all the ArrayLists 
+<span class="nc" id="L217">                this.productCategory.remove(index);</span>
+<span class="nc" id="L218">                this.productName.remove(index);</span>
+<span class="nc" id="L219">                this.prices.remove(index);</span>
+<span class="nc" id="L220">                this.qty.remove(index);</span>
+<span class="nc" id="L221">                this.id.remove(index);</span>
+<span class="nc" id="L222">                removed = true;</span>
+<span class="nc" id="L223">        }else {</span>
+<span class="fc" id="L224">            removed = false;</span>
+        }
+        
+       /*
+        
+        //Is there a product in cart with that id?
+         if (this.id.contains(productId)) {
+            //where is the id's position
+            //this.id.indexOf(productId);
+            int index = this.id.indexOf(productId);
+            int quantity = this.qty.get(index);
+            if (quantity == 1) {
+                //remove the entire stack from all the ArrayLists 
+
+                this.productCategory.remove(index);
+                this.productName.remove(index);
+                this.prices.remove(index);
+                this.qty.remove(index);
+                this.id.remove(index);
+                
+            } else {
+                //Update quantity and decrement by one 
+                quantity -= 1;
+                this.qty.set(index, quantity);
+            }
+            removed = true;
+        } else {
+            removed = false;
+        }*/
+        
+<span class="fc" id="L254">        return removed;</span>
+    }
+
+    public static void main(String args[]) throws SQLException, ClassNotFoundException {
+        try {
+<span class="fc" id="L259">            cart c = new cart();</span>
+<span class="fc" id="L260">            Scanner sc = new Scanner(System.in);</span>
+            /*
+             do {
+             System.out.println(&quot;Do u wish to continue?&quot;);
+             String choice = sc.next();
+             }while (choice.equals(&quot;1&quot;));*/
+<span class="fc" id="L266">            String choice = &quot;1&quot;;</span>
+<span class="pc bpc" id="L267" title="1 of 2 branches missed.">            while (choice.equals(&quot;1&quot;)) {</span>
+
+<span class="fc" id="L269">                System.out.println(&quot;What do u want to buy? Give me ID&quot;);</span>
+
+<span class="nc" id="L271">                int id = sc.nextInt();</span>
+
+<span class="nc" id="L273">                c.addProduct(id); //Good</span>
+
+<span class="nc" id="L275">                System.out.println(&quot;Do u wish to continue?&quot;);</span>
+
+<span class="nc" id="L277">                choice = sc.next();</span>
+<span class="nc" id="L278">            }</span>
+
+<span class="nc" id="L280">            c.showProducts(); //Good</span>
+
+            //c.listItemsOfCart();
+<span class="nc" id="L283">            ArrayList&lt;String&gt; productNames = c.getProductNames();</span>
+<span class="nc" id="L284">            ArrayList&lt;String&gt; p_Category = c.getProductCategorys();</span>
+<span class="nc" id="L285">            ArrayList&lt;Double&gt; prices1 = c.getPrices();</span>
+<span class="nc" id="L286">            ArrayList&lt;Integer&gt; qty1 = c.getQty();</span>
+<span class="nc bnc" id="L287" title="All 2 branches missed.">            for (int i = 0; i &lt; productNames.size(); i++) {</span>
+<span class="nc" id="L288">                System.out.println(p_Category.get(i) + &quot; &quot; + productNames.get(i) + &quot;              \t\t&quot; + prices1.get(i) + &quot; \t\t&quot; + qty1.get(i) + &quot; \t\t&quot; + prices1.get(i) * qty1.get(i));</span>
+            }
+<span class="nc" id="L290">            System.out.println(&quot;Total Price of the cart is :&quot; + c.getTotalPriceOfCart());</span>
+
+<span class="nc" id="L292">            choice = &quot;1&quot;;</span>
+<span class="nc bnc" id="L293" title="All 2 branches missed.">            while (&quot;1&quot;.equals(choice)) {</span>
+
+<span class="nc" id="L295">                System.out.println(&quot;Give Product id to remove&quot;);</span>
+<span class="nc" id="L296">                int id = sc.nextInt();</span>
+<span class="nc" id="L297">                boolean removeProduct = c.removeProduct(id);</span>
+<span class="nc bnc" id="L298" title="All 2 branches missed.">                if (removeProduct){</span>
+<span class="nc bnc" id="L299" title="All 2 branches missed.">                    for (int i = 0; i &lt; productNames.size(); i++) {</span>
+<span class="nc" id="L300">                        System.out.println(p_Category.get(i) + &quot; &quot; + productNames.get(i) + &quot;              \t\t&quot; + prices1.get(i) + &quot; \t\t&quot; + qty1.get(i) + &quot; \t\t&quot; + prices1.get(i) * qty1.get(i));</span>
+                        
+<span class="nc" id="L302">                        System.out.println(&quot;Total Price of the cart is :&quot; + c.getTotalPriceOfCart());</span>
+
+                    }
+                }
+                else {
+<span class="nc" id="L307">                    System.out.println(&quot;No Product to remove!!&quot;);</span>
+                }
+<span class="nc" id="L309">            }</span>
+            
+            
+            
+
+            //c.getTotalPriceOfCart();
+<span class="nc" id="L315">        } catch (SQLException e) {</span>
+<span class="nc" id="L316">            System.out.println(&quot;&quot; + e);</span>
+<span class="nc" id="L317">        } catch (ClassNotFoundException e) {</span>
+<span class="nc" id="L318">            System.out.println(&quot;&quot; + e);</span>
+<span class="nc" id="L319">        }</span>
+<span class="nc" id="L320">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

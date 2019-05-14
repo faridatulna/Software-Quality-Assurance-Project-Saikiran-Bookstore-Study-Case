@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SecureSHA1.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;saikiranBookstoreApp&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">helpers</a> &gt; <span class="el_source">SecureSHA1.java</span></div><h1>SecureSHA1.java</h1><pre class="source lang-java linenums">/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package helpers;
+
+import java.io.UnsupportedEncodingException; 
+import java.security.MessageDigest; 
+import java.security.NoSuchAlgorithmException; 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+ 
+/**
+ *
+ * @author Chirag
+ */
+
+
+
+<span class="nc" id="L20">public class SecureSHA1 {</span>
+    private static String convertToHex(byte[] data) { 
+<span class="fc" id="L22">        StringBuffer buf = new StringBuffer();</span>
+<span class="fc bfc" id="L23" title="All 2 branches covered.">        for (int i = 0; i &lt; data.length; i++) { </span>
+<span class="fc" id="L24">            int halfbyte = (data[i] &gt;&gt;&gt; 4) &amp; 0x0F;</span>
+<span class="fc" id="L25">            int two_halfs = 0;</span>
+            do { 
+<span class="pc bpc" id="L27" title="1 of 4 branches missed.">                if ((0 &lt;= halfbyte) &amp;&amp; (halfbyte &lt;= 9)) </span>
+<span class="fc" id="L28">                    buf.append((char) ('0' + halfbyte));</span>
+                else 
+<span class="fc" id="L30">                    buf.append((char) ('a' + (halfbyte - 10)));</span>
+<span class="fc" id="L31">                halfbyte = data[i] &amp; 0x0F;</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">            } while(two_halfs++ &lt; 1);</span>
+        } 
+<span class="fc" id="L34">        return buf.toString();</span>
+    }
+    
+    
+    public static String getSHA1(String text) 
+                throws NoSuchAlgorithmException, UnsupportedEncodingException  { 
+        MessageDigest md;
+<span class="fc" id="L41">        md = MessageDigest.getInstance(&quot;SHA-1&quot;);</span>
+<span class="fc" id="L42">        byte[] sha1hash = new byte[40];</span>
+<span class="fc" id="L43">        md.update(text.getBytes(&quot;iso-8859-1&quot;), 0, text.length());</span>
+<span class="fc" id="L44">        sha1hash = md.digest();</span>
+<span class="fc" id="L45">        return convertToHex(sha1hash);</span>
+    } 
+    
+    public static void main(String args[]){
+        try {
+<span class="fc" id="L50">            String s = &quot;123&quot;;</span>
+<span class="fc" id="L51">            String sha1S = getSHA1(s);</span>
+<span class="fc" id="L52">            System.out.print(&quot;SHA1 hash for &quot;+ s+ &quot; is &quot;+ sha1S);</span>
+<span class="nc" id="L53">        } catch (Exception e) {</span>
+<span class="nc" id="L54">            System.out.println(e);</span>
+<span class="fc" id="L55">        }</span>
+        
+<span class="fc" id="L57">    }</span>
+}
+
+/*
+ import java.io.UnsupportedEncodingException; 
+import java.security.MessageDigest; 
+import java.security.NoSuchAlgorithmException; 
+ 
+public class AeSimpleSHA1 { 
+ 
+    private static String convertToHex(byte[] data) { 
+        StringBuffer buf = new StringBuffer();
+        for (int i = 0; i &lt; data.length; i++) { 
+            int halfbyte = (data[i] &gt;&gt;&gt; 4) &amp; 0x0F;
+            int two_halfs = 0;
+            do { 
+                if ((0 &lt;= halfbyte) &amp;&amp; (halfbyte &lt;= 9)) 
+                    buf.append((char) ('0' + halfbyte));
+                else 
+                    buf.append((char) ('a' + (halfbyte - 10)));
+                halfbyte = data[i] &amp; 0x0F;
+            } while(two_halfs++ &lt; 1);
+        } 
+        return buf.toString();
+    } 
+ 
+    public static String SHA1(String text) 
+    throws NoSuchAlgorithmException, UnsupportedEncodingException  { 
+    MessageDigest md;
+    md = MessageDigest.getInstance(&quot;SHA-1&quot;);
+    byte[] sha1hash = new byte[40];
+    md.update(text.getBytes(&quot;iso-8859-1&quot;), 0, text.length());
+    sha1hash = md.digest();
+    return convertToHex(sha1hash);
+    } 
+} 
+ */
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

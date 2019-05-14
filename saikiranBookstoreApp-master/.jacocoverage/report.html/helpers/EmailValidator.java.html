@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>EmailValidator.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;saikiranBookstoreApp&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">helpers</a> &gt; <span class="el_source">EmailValidator.java</span></div><h1>EmailValidator.java</h1><pre class="source lang-java linenums">/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package helpers;
+import java.util.Scanner;
+import java.util.regex.*;
+
+/**
+ *
+ * @author Chirag
+ */
+public class EmailValidator {
+
+<span class="fc" id="L15">    boolean result = false;</span>
+        private Pattern pattern;
+    private Matcher matcher;
+    private static final String EMAIL_PATTERN = &quot;^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$&quot;;
+
+<span class="fc" id="L20">    public EmailValidator() {</span>
+<span class="fc" id="L21">        pattern = Pattern.compile(EMAIL_PATTERN);</span>
+<span class="fc" id="L22">    }</span>
+
+    /**
+     * Validate hex with regular expression
+     *
+     * @param hex hex for validation
+     * @return true valid hex, false invalid hex
+     */
+    public boolean validate(final String hex) {
+
+<span class="fc" id="L32">        matcher = pattern.matcher(hex);</span>
+<span class="fc" id="L33">        return matcher.matches();</span>
+
+    }
+          
+          /*
+    public boolean isValidEmail(String email){
+        
+        Pattern p=Pattern.compile(&quot;[a-zA-Z]*[0-9]*@[a-zA-Z]*\\.[a-zA-Z]*&quot;);
+        Matcher m=p.matcher(email);
+        //Matcher m=p.matcher(args[0]);
+        boolean b=m.matches();
+        if(b==true)
+        {
+            result = true;
+        }
+        else
+        {
+            result = false;
+        }
+        return result;
+    }
+    */
+          
+    
+    public static void main(String arg[]){
+<span class="fc" id="L58">        EmailValidator valid = new EmailValidator();</span>
+<span class="fc" id="L59">        System.out.print(&quot;Gimme an email to validate &quot;);</span>
+<span class="fc" id="L60">        Scanner sc = new Scanner(System.in);</span>
+<span class="nc" id="L61">        String email = sc.next();</span>
+        
+<span class="nc" id="L63">        boolean b = valid.validate(email);</span>
+<span class="nc" id="L64">        System.out.println(&quot;email is &quot;+ b);</span>
+<span class="nc" id="L65">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>product.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;saikiranBookstoreApp&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">product</a> &gt; <span class="el_source">product.java</span></div><h1>product.java</h1><pre class="source lang-java linenums">/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package product;
+import database.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ *
+ * @author chirag
+ */
+<span class="fc" id="L19">public class product {</span>
+
+    private int productId; 
+<span class="fc" id="L22">    private ArrayList&lt;String&gt; category = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L23">    private ArrayList&lt;String&gt; subcategory = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L24">    private ArrayList&lt;String&gt; company = new ArrayList&lt;String&gt;();</span>
+    private Connection con;
+    
+    
+    public int getId (String productName) throws SQLException{
+        int id;
+<span class="fc" id="L30">        String getIdSQL = &quot;SELECT  `product_id` &quot; +</span>
+                        &quot;FROM  `products` &quot; +
+                        &quot;WHERE  `product-name` = '&quot;+productName+&quot;'; &quot;;
+        
+<span class="nc" id="L34">        Statement st = con.createStatement();</span>
+<span class="nc" id="L35">        ResultSet executeQuery = st.executeQuery(getIdSQL);</span>
+<span class="nc" id="L36">        executeQuery.next();</span>
+<span class="nc" id="L37">        id = executeQuery.getInt(&quot;product_id&quot;);</span>
+<span class="nc" id="L38">        return id;</span>
+    }
+    public ArrayList&lt;String&gt; getCategory() throws SQLException, ClassNotFoundException {
+<span class="fc" id="L41">        DB_Conn c = new DB_Conn();</span>
+<span class="fc" id="L42">        con = c.getConnection();</span>
+<span class="fc" id="L43">        String getCategorySQL = &quot;SELECT  `category_name` FROM  `category`; &quot;;</span>
+<span class="fc" id="L44">        PreparedStatement psmt = con.prepareStatement(getCategorySQL);</span>
+<span class="fc" id="L45">        ResultSet executeQuery = psmt.executeQuery();</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        while (executeQuery.next()){</span>
+<span class="fc" id="L47">            String category1 = executeQuery.getString (&quot;category_name&quot;);</span>
+<span class="fc" id="L48">            this.category.add(category1);</span>
+<span class="fc" id="L49">        }</span>
+<span class="fc" id="L50">        return category;</span>
+    }
+
+    public ArrayList&lt;String&gt; getSubcategory() throws SQLException, ClassNotFoundException {
+<span class="fc" id="L54">        DB_Conn c = new DB_Conn();</span>
+<span class="fc" id="L55">        con = c.getConnection();</span>
+<span class="fc" id="L56">        String getCategorySQL = &quot;SELECT  `sub-category_name` &quot; +</span>
+                                &quot;FROM  `sub-category`;&quot;;
+<span class="fc" id="L58">        PreparedStatement psmt = con.prepareStatement(getCategorySQL);</span>
+<span class="fc" id="L59">        ResultSet executeQuery = psmt.executeQuery();</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">        while (executeQuery.next()){</span>
+<span class="fc" id="L61">            String subcategory1 = executeQuery.getString (&quot;sub-category_name&quot;);</span>
+<span class="fc" id="L62">            this.subcategory.add(subcategory1);</span>
+<span class="fc" id="L63">        }</span>
+<span class="fc" id="L64">        return subcategory;</span>
+    }
+    
+    public ArrayList&lt;String&gt; getSubcategory(String category) throws SQLException, ClassNotFoundException {
+<span class="fc" id="L68">        DB_Conn c = new DB_Conn();</span>
+<span class="fc" id="L69">        con = c.getConnection();</span>
+<span class="fc" id="L70">        String getCategorySQL = &quot;SELECT  `sub-category_name` &quot; +</span>
+                                &quot;FROM  `sub-category` &quot; +
+                                &quot;WHERE  `category_name` =  ?;&quot;;
+        
+<span class="fc" id="L74">        PreparedStatement psmt = con.prepareStatement(getCategorySQL);</span>
+<span class="fc" id="L75">        psmt.setString(1, category);</span>
+<span class="fc" id="L76">        ResultSet executeQuery = psmt.executeQuery();</span>
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        while (executeQuery.next()){</span>
+<span class="fc" id="L78">            String subcategory1 = executeQuery.getString (&quot;sub-category_name&quot;);</span>
+<span class="fc" id="L79">            this.subcategory.add(subcategory1);</span>
+<span class="fc" id="L80">        }</span>
+<span class="fc" id="L81">        return subcategory;</span>
+    }
+
+    public ArrayList&lt;String&gt; getCompany(String category) throws SQLException, ClassNotFoundException {
+
+<span class="fc" id="L86">        DB_Conn c = new DB_Conn();</span>
+<span class="fc" id="L87">        con = c.getConnection();</span>
+<span class="fc" id="L88">        String getCategorySQL = &quot;SELECT  `company-name` &quot; +</span>
+                                &quot;FROM  `products` &quot; +
+                                &quot;GROUP BY  `company-name` ;&quot;;
+        
+<span class="fc" id="L92">        PreparedStatement psmt = con.prepareStatement(getCategorySQL);</span>
+<span class="nc" id="L93">        psmt.setString(1, category);</span>
+<span class="nc" id="L94">        ResultSet executeQuery = psmt.executeQuery();</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        while (executeQuery.next()){</span>
+<span class="nc" id="L96">            String company_name = executeQuery.getString (&quot;company-name&quot;);</span>
+<span class="nc" id="L97">            this.company.add(company_name);</span>
+<span class="nc" id="L98">        }</span>
+<span class="nc" id="L99">        return company;</span>
+    }
+    
+    public ArrayList&lt;String&gt; getCompany() throws SQLException, ClassNotFoundException {
+
+<span class="fc" id="L104">        DB_Conn c = new DB_Conn();</span>
+<span class="fc" id="L105">        con = c.getConnection();</span>
+<span class="fc" id="L106">        String getCategorySQL = &quot;SELECT  `company-name` &quot; +</span>
+                                &quot;FROM  `products` &quot; +
+                                &quot;GROUP BY  `company-name` ;&quot;;
+        
+<span class="fc" id="L110">        PreparedStatement psmt = con.prepareStatement(getCategorySQL);</span>
+        
+<span class="fc" id="L112">        ResultSet executeQuery = psmt.executeQuery();</span>
+<span class="fc bfc" id="L113" title="All 2 branches covered.">        while (executeQuery.next()){</span>
+<span class="fc" id="L114">            String company_name = executeQuery.getString (&quot;company-name&quot;);</span>
+<span class="fc" id="L115">            this.company.add(company_name);</span>
+<span class="fc" id="L116">        }</span>
+<span class="fc" id="L117">        return company;</span>
+    }
+    
+    public static void main (String args []) throws SQLException, ClassNotFoundException{
+<span class="fc" id="L121">        product p = new product();</span>
+<span class="fc" id="L122">        ArrayList&lt;String&gt; company1 = p.getCompany();</span>
+<span class="fc" id="L123">        ArrayList&lt;String&gt; category1 = p.getCategory();</span>
+<span class="fc" id="L124">        ArrayList&lt;String&gt; subcategory1 = p.getSubcategory(&quot;Computers&quot;);</span>
+    
+<span class="fc bfc" id="L126" title="All 2 branches covered.">        for (int i=0;i&lt;company1.size() ; i++){</span>
+<span class="fc" id="L127">            System.out.println(&quot; &quot;+company1.get(i));</span>
+        }
+        
+        
+<span class="fc" id="L131">        System.out.println(&quot;&quot;);</span>
+        
+<span class="fc bfc" id="L133" title="All 2 branches covered.">        for (int i=0;i&lt;subcategory1.size() ; i++){</span>
+<span class="fc" id="L134">            System.out.println(&quot; &quot;+subcategory1.get(i));</span>
+        } 
+        
+<span class="fc" id="L137">        Scanner sc = new Scanner(System.in);</span>
+<span class="nc" id="L138">        String next = sc.next();</span>
+<span class="nc" id="L139">        p.getId(next);</span>
+        
+<span class="nc" id="L141">            System.out.println(&quot; &quot;+</span>
+<span class="nc" id="L142">                    p.getId(next));</span>
+<span class="nc" id="L143">    }</span>
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

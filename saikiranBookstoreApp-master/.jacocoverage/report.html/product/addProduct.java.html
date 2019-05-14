@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>addProduct.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;saikiranBookstoreApp&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">product</a> &gt; <span class="el_source">addProduct.java</span></div><h1>addProduct.java</h1><pre class="source lang-java linenums">/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package product;
+import java.sql.*;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import database.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpSession;
+
+/**
+ *
+ * @author student
+ */
+<span class="fc" id="L23">public class addProduct extends HttpServlet {</span>
+
+    /**
+     * Processes requests for both HTTP
+     * &lt;code&gt;GET&lt;/code&gt; and
+     * &lt;code&gt;POST&lt;/code&gt; methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+<span class="nc" id="L37">        response.setContentType(&quot;text/html;charset=UTF-8&quot;);</span>
+<span class="nc" id="L38">        PrintWriter out = response.getWriter();</span>
+        try {
+            /*
+             * TODO output your page here. You may use following sample code.
+             */
+<span class="nc" id="L43">            out.println(&quot;&lt;html&gt;&quot;);</span>
+<span class="nc" id="L44">            out.println(&quot;&lt;head&gt;&quot;);</span>
+<span class="nc" id="L45">            out.println(&quot;&lt;title&gt;Servlet addProduct&lt;/title&gt;&quot;);</span>
+<span class="nc" id="L46">            out.println(&quot;&lt;/head&gt;&quot;);</span>
+<span class="nc" id="L47">            out.println(&quot;&lt;body&gt;&quot;);</span>
+<span class="nc" id="L48">            out.println(&quot;&lt;h1&gt;Servlet addProduct at &quot; + request.getContextPath() + &quot;&lt;/h1&gt;&quot;);</span>
+<span class="nc" id="L49">            out.println(&quot;&lt;/body&gt;&quot;);</span>
+<span class="nc" id="L50">            out.println(&quot;&lt;/html&gt;&quot;);</span>
+        } finally {
+<span class="nc" id="L52">            out.close();</span>
+<span class="nc" id="L53">        }</span>
+<span class="nc" id="L54">    }</span>
+
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;HttpServlet methods. Click on the + sign on the left to edit the code.&quot;&gt;
+    /**
+     * Handles the HTTP
+     * &lt;code&gt;GET&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        //processRequest(request, response);
+        
+        //response.setContentType(&quot;text/html;charset=UTF-8&quot;);
+        
+        String message, messageDetails, url;
+        RequestDispatcher dispacher;
+        /*
+        dispacher = 
+                    getServletContext().getRequestDispatcher(url);
+            dispacher.forward(request, response);
+            */
+            
+        String productName, productQty, company, category, subCategory, price, discountedPrice, summary, tags;
+<span class="nc" id="L82">        company = request.getParameter(&quot;company&quot;);</span>
+<span class="nc" id="L83">        productQty = request.getParameter(&quot;productQty&quot;);</span>
+<span class="nc" id="L84">        productName = request.getParameter(&quot;productName&quot;);</span>
+<span class="nc" id="L85">        category = request.getParameter(&quot;category&quot;);</span>
+<span class="nc" id="L86">        subCategory = request.getParameter(&quot;subCategory&quot;);</span>
+<span class="nc" id="L87">        price = request.getParameter(&quot;price&quot;);</span>
+<span class="nc" id="L88">        tags = request.getParameter(&quot;tags&quot;);</span>
+        //discountedPrice = request.getParameter(&quot;discountedPrice&quot;);
+<span class="nc" id="L90">        summary = request.getParameter(&quot;summary&quot;);</span>
+<span class="nc" id="L91">        PrintWriter out = response.getWriter();</span>
+<span class="nc" id="L92">        out.println(&quot;productName &quot; + productName</span>
+                + &quot; &lt;br&gt;company &quot; + company
+                + &quot; &lt;br&gt;category &quot; + category
+                + &quot; &lt;br&gt;subCategory &quot; + subCategory
+                + &quot; &lt;br&gt;price &quot; + price
+               // + &quot; &lt;br&gt;discountedPrice &quot; + discountedPrice
+                + &quot; &lt;br&gt;summary &lt;br&gt;&quot; + summary
+                +&quot; &lt;br&gt;summary &lt;br&gt;&quot; + tags);
+<span class="nc bnc" id="L100" title="All 4 branches missed.">        if (!productName.equals(&quot;&quot;) || !price.equals(&quot;&quot;) ){</span>
+            try {
+<span class="nc" id="L102">                String insertQuery = &quot;&quot;</span>
+                        + &quot;INSERT INTO  &quot;
+                        + &quot;`saikiran enterprises`.`products` &quot;
+                        + &quot;(`product_id` ,&quot;
+                        + &quot;`product-name` ,&quot;
+                        + &quot;`sub-category-name` ,&quot;
+                        + &quot;`category-name` ,&quot;
+                        + &quot;`company-name` ,&quot;
+                        + &quot;`price` ,&quot;
+                        + &quot;`summary`, &quot;
+                        + &quot;`tags`, &quot;
+                        + &quot;`product_qty` ) &quot;
+                        + &quot;VALUES &quot;
+                        + &quot;&quot;
+                        + &quot;(NULL ,  &quot;
+                        + &quot;'&quot;+productName+&quot;',  &quot;
+                        + &quot;'&quot;+subCategory+&quot;',  &quot;
+                        + &quot;'&quot;+category+&quot;',  &quot;
+                        + &quot;'&quot;+company+&quot;',  &quot;
+                        + &quot;'&quot;+price+&quot;', &quot;
+                        + &quot;'&quot;+summary+&quot;', &quot;
+                        + &quot;'&quot;+tags+&quot;', &quot;
+                        + &quot;&quot;+productQty+&quot;);&quot;;
+                
+<span class="nc" id="L126">                DB_Conn conn = new DB_Conn();</span>
+<span class="nc" id="L127">                Connection con = conn.getConnection();</span>
+<span class="nc" id="L128">                Statement st = con.createStatement();</span>
+                
+<span class="nc" id="L130">                int rows = st.executeUpdate(insertQuery);</span>
+<span class="nc bnc" id="L131" title="All 2 branches missed.">                if (rows == 1){</span>
+                    /*out.print(company +&quot; &quot;+ productName+ &quot;&quot;
+                    + &quot; Product Inserted &quot;);*/
+                    
+                    //GET THE ID OF THE Product recently inserted
+<span class="nc" id="L136">                    ResultSet executeQuery = st.executeQuery(&quot;SELECT  `product_id` &quot;</span>
+                                                         + &quot; FROM  `products` &quot;
+                                                         + &quot; WHERE  `product-name` =  '&quot;+productName+&quot;'&quot;);
+<span class="nc" id="L139">                    String ProductId = &quot;&quot;;</span>
+<span class="nc bnc" id="L140" title="All 2 branches missed.">                    while (executeQuery.next()){</span>
+<span class="nc" id="L141">                        ProductId = executeQuery.getString(&quot;product_id&quot;);</span>
+                    
+                    }
+<span class="nc" id="L144">                    HttpSession session = request.getSession();</span>
+<span class="nc" id="L145">                    session.setAttribute(&quot;productName&quot;, productName);</span>
+<span class="nc" id="L146">                    session.setAttribute(&quot;productId&quot;, ProductId);</span>
+<span class="nc" id="L147">                    out.print(&quot;Product inserted&quot;);</span>
+<span class="nc" id="L148">                    message = &quot;Product Inserted...&quot;;</span>
+<span class="nc" id="L149">                    messageDetails = company +&quot; &quot;+ productName+ &quot;&quot;</span>
+                            + &quot; Product Inserted Successfully... &quot;;
+                    //&quot;http://localhost/uploadProductFile/&quot;
+<span class="nc" id="L152">                    url =&quot;/productInsertImages.jsp&quot;;</span>
+<span class="nc" id="L153">                    request.setAttribute(&quot;productName&quot;, productName);</span>
+<span class="nc" id="L154">                    request.setAttribute(&quot;message&quot;, message);</span>
+<span class="nc" id="L155">                    request.setAttribute(&quot;messageDetails&quot;, messageDetails);</span>
+<span class="nc" id="L156">                    dispacher = </span>
+<span class="nc" id="L157">                    getServletContext().getRequestDispatcher(url);</span>
+<span class="nc" id="L158">                    dispacher.forward(request, response);</span>
+                }
+<span class="nc" id="L160">                st.close();</span>
+<span class="nc" id="L161">                con.close();</span>
+            }
+<span class="nc" id="L163">            catch (SQLException ex) {</span>
+                //out.println(&quot;SQL Exception &quot;+ex);
+<span class="nc" id="L165">                    message = &quot;Product Not Inserted...&quot;;</span>
+<span class="nc" id="L166">                    messageDetails = company +&quot; &quot;+ productName+ &quot;&quot;</span>
+                            + &quot; Product not Inserted because of a Database error&quot;;
+<span class="nc" id="L168">                    out.print(&quot;Product not inserted &quot;+ ex);</span>
+<span class="nc" id="L169">                    url =&quot;/productInsertImages.jsp&quot;;</span>
+<span class="nc" id="L170">                    request.setAttribute(&quot;message&quot;, message);</span>
+<span class="nc" id="L171">                    request.setAttribute(&quot;messageDetails&quot;, messageDetails);</span>
+<span class="nc" id="L172">                    dispacher = </span>
+<span class="nc" id="L173">                    getServletContext().getRequestDispatcher(url);</span>
+                    //dispacher.forward(request, response);
+            
+                //Logger.getLogger(addProduct.class.getName()).log(Level.SEVERE, null, ex);
+<span class="nc" id="L177">            } catch (ClassNotFoundException ex) {</span>
+                //out.println(&quot;Class Not Found Exception &quot;+ex);
+                
+<span class="nc" id="L180">                    message = &quot;Product Not Inserted...&quot;;</span>
+<span class="nc" id="L181">                    messageDetails = company +&quot; &quot;+ productName+ &quot;&quot;</span>
+                            + &quot; Product not Inserted because of an error&quot;;
+                    
+<span class="nc" id="L184">                    url =&quot;/productInsertImages.jsp&quot;;</span>
+<span class="nc" id="L185">                    request.setAttribute(&quot;message&quot;, message);</span>
+<span class="nc" id="L186">                    request.setAttribute(&quot;messageDetails&quot;, messageDetails);</span>
+<span class="nc" id="L187">                    dispacher = </span>
+<span class="nc" id="L188">                    getServletContext().getRequestDispatcher(url);</span>
+            //dispacher.forward(request, response);
+            
+                //Logger.getLogger(addProduct.class.getName()).log(Level.SEVERE, null, ex);
+<span class="nc" id="L192">            }</span>
+        }
+        else {
+            //out.println(&quot;Please Enter Product-name and Price&quot;);
+<span class="nc" id="L196">                    message = &quot;Product Not Inserted...&quot;;</span>
+<span class="nc" id="L197">                    messageDetails = &quot;Please Enter Product-name and Price&quot;;</span>
+<span class="nc" id="L198">                    out.print(&quot;Product not inserted &quot; + &quot; &quot;+message);</span>
+<span class="nc" id="L199">                    url =&quot;/productInsertImages.jsp&quot;;</span>
+<span class="nc" id="L200">                    request.setAttribute(&quot;message&quot;, message);</span>
+<span class="nc" id="L201">                    request.setAttribute(&quot;messageDetails&quot;, messageDetails);</span>
+<span class="nc" id="L202">                    dispacher = </span>
+<span class="nc" id="L203">                    getServletContext().getRequestDispatcher(url);</span>
+<span class="nc" id="L204">            dispacher.forward(request, response);</span>
+        }
+<span class="nc" id="L206">    }</span>
+
+    /**
+     * Handles the HTTP
+     * &lt;code&gt;POST&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        //processRequest(request, response);
+<span class="nc" id="L221">        doGet(request, response);</span>
+<span class="nc" id="L222">    }</span>
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+<span class="fc" id="L231">        return &quot;Short description&quot;;</span>
+    }// &lt;/editor-fold&gt;
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
