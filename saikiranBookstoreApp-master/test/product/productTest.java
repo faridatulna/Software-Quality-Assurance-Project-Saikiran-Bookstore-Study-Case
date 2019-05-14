@@ -5,7 +5,10 @@
  */
 package product;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -121,12 +124,12 @@ public class productTest {
      * Test of getCompany method, of class product.
      */
     @Test
-    public void testGetCompany_String() throws Exception {
+    public void testGetCompany_String() throws SQLException, ClassNotFoundException {
         System.out.println("getCompany");
         String category = "Computers";
+        
         product instance = new product();
-        ArrayList<String> expResult = new ArrayList<String>();
-        expResult.addAll(["Dell","Acer"]);
+        List<String> expResult = Arrays.asList();
         ArrayList<String> result = instance.getCompany(category);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
