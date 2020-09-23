@@ -1,2 +1,1 @@
-# pmpl-saikiran
-pmpl's final project
+# Software Quality Assurance Project : Saikiran Bookstore Study Case
